@@ -85,11 +85,13 @@ Spawn → Explore ruins → Solve puzzles → Avoid ghost → Escape = WIN
 
 ## Level Design
 
-- Map is hand-crafted, fixed layout (NOT procedurally generated)
-- One level for MVP
-- Level designer (Majid) places corridors, rooms, and puzzle chokepoints manually
-- Ghost patrol routes are tuned to the fixed layout
-- This decision was made to: control pacing, simplify ghost AI, reduce scope
+- Map is an NxN grid-based maze, procedurally generated each run
+- Algorithm: Recursive Backtracking (depth-first search) — simple, produces connected mazes with one solution path
+- Grid size N is configurable (e.g. 10x10 for MVP, tunable for difficulty)
+- Each cell is either a wall or a corridor
+- Ghost AI uses NavMesh baked at runtime over the generated maze
+- Puzzles and the start/exit points are placed algorithmically after generation
+- Each playthrough produces a different maze = replayability
 
 ---
 
