@@ -1,0 +1,80 @@
+# ===========================
+# Unity Generated Folders
+# ===========================
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Mm]emory[Cc]aptures/
+
+# ===========================
+# Unity Asset Meta Files
+# Keep .meta files — Unity needs them for GUIDs
+# ===========================
+
+# ===========================
+# Visual Studio / Rider IDE
+# ===========================
+.vs/
+.vscode/
+*.csproj
+*.unityproj
+*.sln
+*.slnx
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# ===========================
+# JetBrains Rider
+# ===========================
+.idea/
+*.sln.iml
+
+# ===========================
+# OS Generated
+# ===========================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ===========================
+# Unity Cache & Crash Files
+# ===========================
+sysinfo.txt
+*.stackdump
+crashlytics-build.properties
+
+# ===========================
+# Build Artifacts
+# ===========================
+*.apk
+*.aab
+*.unitypackage
+*.app
+
+# ===========================
+# TextMesh Pro (keep asset files, ignore cache)
+# ===========================
+[Aa]ssets/[Tt]ext[Mm]esh[Pp]ro/Examples/
+
+# ===========================
+# Burst Compiler
+# ===========================
+[Aa]ssets/[Bb]urst*
