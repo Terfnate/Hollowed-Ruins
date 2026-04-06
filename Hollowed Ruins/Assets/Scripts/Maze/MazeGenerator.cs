@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 public class MazeGenerator : MonoBehaviour
@@ -42,8 +43,10 @@ public class MazeGenerator : MonoBehaviour
     {
         GenerateMaze();
         BuildMesh();
+        GetComponent<NavMeshSurface>().BuildNavMesh();
         PlaceObjects();
     }
+
 
     private void GenerateMaze()
     {
