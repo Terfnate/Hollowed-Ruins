@@ -41,7 +41,7 @@ public class GhostAI : MonoBehaviour
     {
         _player = GameObject.FindGameObjectWithTag("Player")?.transform;
 
-        NoiseSystem.Instance.OnNoiseEmitted.AddListener(OnNoiseHeard);
+        NoiseSystem.Instance.OnNoiseEmitted += OnNoiseHeard;
 
         SetState(GhostState.Patrol);
         PickNewPatrolTarget();
@@ -50,7 +50,7 @@ public class GhostAI : MonoBehaviour
     void OnDestroy()
     {
         if (NoiseSystem.Instance != null)
-            NoiseSystem.Instance.OnNoiseEmitted.RemoveListener(OnNoiseHeard);
+            NoiseSystem.Instance.OnNoiseEmitted -= OnNoiseHeard;
     }
 
     void Update()
