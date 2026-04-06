@@ -10,18 +10,18 @@ public class PieceCollectionSystem : MonoBehaviour
     public int CollectedCount { get; private set; }
     public int TotalPieces => totalPieces;
 
-    // Standard C# events — no UnityEvent<T,T> to avoid Unity serialization issues
-    public event System.Action<int, int> OnPieceCollected;  // (collected, total)
+    public event System.Action<int, int> OnPieceCollected;
     public event System.Action OnAllPiecesCollected;
-    public UnityEvent OnAllPiecesCollectedUnity;
+    public UnityEvent OnAllPiecesCollectedUnity = new();
 
-    void Awake()
+    private void Awake()
     {
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
+
         Instance = this;
     }
 
@@ -30,12 +30,18 @@ public class PieceCollectionSystem : MonoBehaviour
         CollectedCount++;
         OnPieceCollected?.Invoke(CollectedCount, totalPieces);
 
-        if (CollectedCount >= totalPieces)
+        if (CollectedCount < totalPieces)
         {
-            OnAllPiecesCollected?.Invoke();
-            MazeGenerator.Instance?.RevealExit();
+            return;
         }
+
+        OnAllPiecesCollected?.Invoke();
+        OnAllPiecesCollectedUnity?.Invoke();
+        MazeGenerator.Instance?.RevealExit();
     }
 
-    public bool AllCollected() => CollectedCount >= totalPieces;
+    public bool AllCollected()
+    {
+        return CollectedCount >= totalPieces;
+    }
 }
