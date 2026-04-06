@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("Camera")]
     [SerializeField] private Transform cameraTarget;   // empty child object the camera follows
-    [SerializeField] private float cameraDistance = 5f;
     [SerializeField] private float cameraSensitivity = 2f;
     [SerializeField] private float cameraMinY = -20f;
     [SerializeField] private float cameraMaxY = 60f;

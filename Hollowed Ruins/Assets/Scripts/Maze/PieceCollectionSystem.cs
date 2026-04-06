@@ -8,9 +8,12 @@ public class PieceCollectionSystem : MonoBehaviour
     [SerializeField] private int totalPieces = 5;
 
     public int CollectedCount { get; private set; }
+    public int TotalPieces => totalPieces;
 
-    public UnityEvent<int, int> OnPieceCollected;   // collected, total
-    public UnityEvent OnAllPiecesCollected;
+    // Standard C# events — no UnityEvent<T,T> to avoid Unity serialization issues
+    public event System.Action<int, int> OnPieceCollected;  // (collected, total)
+    public event System.Action OnAllPiecesCollected;
+    public UnityEvent OnAllPiecesCollectedUnity;
 
     void Awake()
     {
