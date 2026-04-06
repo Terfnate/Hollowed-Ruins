@@ -31,10 +31,10 @@ public class ChessBoardUI : MonoBehaviour
 
     void Start()
     {
-        ChessDuelManager.Instance.OnDuelStarted.AddListener(OnDuelStarted);
-        ChessDuelManager.Instance.OnPlayerMoved.AddListener(OnMoveExecuted);
-        ChessDuelManager.Instance.OnGhostMoved.AddListener(OnMoveExecuted);
-        ChessDuelManager.Instance.OnTurnsRemainingChanged.AddListener(OnTurnsChanged);
+        ChessDuelManager.Instance.OnDuelStarted         += OnDuelStarted;
+        ChessDuelManager.Instance.OnPlayerMoved          += OnMoveExecuted;
+        ChessDuelManager.Instance.OnGhostMoved           += OnMoveExecuted;
+        ChessDuelManager.Instance.OnTurnsRemainingChanged += OnTurnsChanged;
     }
 
     // ─── Duel Start ───────────────────────────────────────────────────────────

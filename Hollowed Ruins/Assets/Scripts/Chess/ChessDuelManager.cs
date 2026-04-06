@@ -16,10 +16,10 @@ public class ChessDuelManager : MonoBehaviour
     [SerializeField] private float ghostMoveDelay = 1.2f;  // seconds ghost "thinks"
 
     // Events for the UI to listen to
-    public UnityEvent<ChessBoard> OnDuelStarted;
-    public UnityEvent<ChessPiece, Vector2Int> OnPlayerMoved;
-    public UnityEvent<ChessPiece, Vector2Int> OnGhostMoved;
-    public UnityEvent<int> OnTurnsRemainingChanged;         // passes turns left
+    public event System.Action<ChessBoard>           OnDuelStarted;
+    public event System.Action<ChessPiece, Vector2Int> OnPlayerMoved;
+    public event System.Action<ChessPiece, Vector2Int> OnGhostMoved;
+    public event System.Action<int>                  OnTurnsRemainingChanged;
     public UnityEvent OnPlayerWon;
     public UnityEvent OnPlayerLost;
 
