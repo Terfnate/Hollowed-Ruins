@@ -124,6 +124,7 @@ public class ChessDuelManager : MonoBehaviour
 
     public ChessPiece GetSelectedPiece() => _selectedPiece;
     public List<Vector2Int> GetSelectedMoves() => _selectedMoves;
+    public string GetCurrentObjectiveDescription() => _currentScenario?.objective.description ?? "";
 
     // ─── Ghost Turn ───────────────────────────────────────────────────────────
 
