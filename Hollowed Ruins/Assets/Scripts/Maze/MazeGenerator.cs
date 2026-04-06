@@ -124,7 +124,7 @@ public class MazeGenerator : MonoBehaviour
         // Exit cell
         _exitCell = corridors[corridors.Count - 2];
         _exitObject = Spawn(exitPrefab, CellToWorld(_exitCell.x, _exitCell.y));
-        _exitObject.SetActive(false); // hidden until all pieces collected
+        if (_exitObject != null) _exitObject.SetActive(false); // hidden until all pieces collected
 
         // Key pieces
         _keyPieceCells.Clear();

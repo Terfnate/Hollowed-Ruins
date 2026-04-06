@@ -22,8 +22,11 @@ public class HUDController : MonoBehaviour
 
     void Start()
     {
-        HealthSystem.Instance.OnHeartsChanged.AddListener(UpdateHearts);
-        PieceCollectionSystem.Instance.OnPieceCollected.AddListener(UpdatePieceCounter);
+        if (HealthSystem.Instance != null)
+            HealthSystem.Instance.OnHeartsChanged.AddListener(UpdateHearts);
+
+        if (PieceCollectionSystem.Instance != null)
+            PieceCollectionSystem.Instance.OnPieceCollected.AddListener(UpdatePieceCounter);
 
         if (ghostWarningIcon != null)
             _warningGroup = ghostWarningIcon.GetComponent<CanvasGroup>();
