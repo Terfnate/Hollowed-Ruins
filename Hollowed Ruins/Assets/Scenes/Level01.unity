@@ -336,7 +336,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.4, z: -5}
+  m_LocalPosition: {x: 0, y: 5.4, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -449,7 +449,7 @@ Transform:
   m_GameObject: {fileID: 339975189}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1461,7 +1461,7 @@ Transform:
   m_GameObject: {fileID: 591789211}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.4, z: -5}
+  m_LocalPosition: {x: 0, y: 5.4, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3048,14 +3048,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7d62ce94eeb271449dfc5ecb40dec14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MazeGenerator
-  width: 7
-  height: 7
-  cellSize: 4
+  width: 13
+  height: 13
+  cellSize: 20
   floorPrefab: {fileID: 6558783123155753158, guid: 3d5352d08d58a23409755bd88e0cf87c, type: 3}
   wallPrefab: {fileID: 1389954772734335899, guid: 295c1309eb1a3c849aaca707f639ec9b, type: 3}
   keyPiecePrefab: {fileID: 1382408969253891164, guid: e7ff8cb9baef14241be5e1e6cebeda23, type: 3}
   exitPrefab: {fileID: 4709745602931901979, guid: 4092cc99014045b4cb2380915ade40e2, type: 3}
   keyPieceCount: 5
+  ghost: {fileID: 1936541474}
+  player: {fileID: 339975190}
 --- !u!114 &2017844860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3086,7 +3088,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: c95373a5eae06094f80f3f0abc80ccbd, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &2077049858
 GameObject:
