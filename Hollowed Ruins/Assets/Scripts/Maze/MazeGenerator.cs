@@ -74,8 +74,16 @@ public class MazeGenerator : MonoBehaviour
 
     private void GenerateMaze()
     {
-        _grid = new int[width, height];
-        CarveFrom(0, 0);
+        _grid = new int[width, height]; // all walls
+
+        // Start at (1,1) so the outer ring (0 and width/height-1) stays as border walls
+        CarveFrom(1, 1);
+
+        // Guarantee a 2x2 open hall at the center
+        ForceCenterHall();
+
+        // Punch extra gaps so the maze has multiple paths, not just one solution
+        AddGaps(8);
     }
 
     private void CarveFrom(int x, int y)
@@ -105,6 +113,43 @@ public class MazeGenerator : MonoBehaviour
         }
     }
 
+    // Forces the 2x2 area at the center of the maze to always be open.
+    private void ForceCenterHall()
+    {
+        int cx = width  / 2; // 3
+        int cy = height / 2; // 3
+
+        for (int x = cx; x <= cx + 1; x++)
+            for (int y = cy; y <= cy + 1; y++)
+                if (InBounds(x, y)) _grid[x, y] = 1;
+    }
+
+    // Removes random interior walls that sit between two corridors,
+    // creating loops so the maze has more than one solution path.
+    private void AddGaps(int count)
+    {
+        int added = 0, attempts = 0;
+
+        while (added < count && attempts < count * 40)
+        {
+            attempts++;
+
+            int x = Random.Range(1, width  - 1);
+            int y = Random.Range(1, height - 1);
+
+            if (_grid[x, y] == 1) continue; // already open
+
+            bool horizontal = _grid[x - 1, y] == 1 && _grid[x + 1, y] == 1;
+            bool vertical   = _grid[x, y - 1] == 1 && _grid[x, y + 1] == 1;
+
+            if (horizontal || vertical)
+            {
+                _grid[x, y] = 1;
+                added++;
+            }
+        }
+    }
+
     private void BuildMesh()
     {
         for (int x = 0; x < width; x++)
@@ -127,23 +172,36 @@ public class MazeGenerator : MonoBehaviour
 
     private void PlaceObjects()
     {
+        // Player always spawns at the center hall
+        _playerSpawn = new Vector2Int(width / 2, height / 2);
+
+        // Ghost spawns at one of the four inner corners of the maze
+        var corners = new List<Vector2Int>
+        {
+            new(1, 1),
+            new(1, height - 2),
+            new(width - 2, 1),
+            new(width - 2, height - 2)
+        };
+        _ghostSpawn = corners[Random.Range(0, corners.Count)];
+
+        // Remaining corridors for exit and key pieces (exclude spawn points)
         List<Vector2Int> corridors = GetAllCorridors();
+        corridors.Remove(_playerSpawn);
+        corridors.Remove(_ghostSpawn);
         Shuffle(corridors);
 
         int idx = 0;
 
-        _playerSpawn = corridors[idx++];
-        _ghostSpawn = corridors[corridors.Count - 1];
-
-        _exitCell = corridors[corridors.Count - 2];
+        // Exit
+        _exitCell   = corridors[idx++];
         _exitObject = Spawn(exitPrefab, CellToWorld(_exitCell.x, _exitCell.y));
         if (_exitObject != null)
-        {
             _exitObject.SetActive(false);
-        }
 
+        // Key pieces
         _keyPieceCells.Clear();
-        for (int i = 0; i < keyPieceCount && idx < corridors.Count - 2; i++, idx++)
+        for (int i = 0; i < keyPieceCount && idx < corridors.Count; i++, idx++)
         {
             _keyPieceCells.Add(corridors[idx]);
             Spawn(keyPiecePrefab, CellToWorld(corridors[idx].x, corridors[idx].y));
