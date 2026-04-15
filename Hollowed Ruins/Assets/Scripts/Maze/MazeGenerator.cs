@@ -20,6 +20,10 @@ public class MazeGenerator : MonoBehaviour
     [Header("Piece Settings")]
     [SerializeField] private int keyPieceCount = 5;
 
+    [Header("References")]
+    [SerializeField] private GhostAI ghost;
+    [SerializeField] private Transform player;
+
     private int[,] _grid;
     private Vector2Int _playerSpawn;
     private Vector2Int _ghostSpawn;
@@ -45,6 +49,17 @@ public class MazeGenerator : MonoBehaviour
         BuildMesh();
         GetComponent<NavMeshSurface>().BuildNavMesh();
         PlaceObjects();
+        PositionActors();
+    }
+
+    void PositionActors()
+    {
+        // Move player and ghost to their spawn cells after NavMesh is baked
+        if (player != null)
+            player.position = GetPlayerSpawnWorld();
+
+        if (ghost != null)
+            ghost.transform.position = GetGhostSpawnWorld();
     }
 
 

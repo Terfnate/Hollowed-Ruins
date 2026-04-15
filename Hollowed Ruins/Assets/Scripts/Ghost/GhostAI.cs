@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -41,7 +42,18 @@ public class GhostAI : MonoBehaviour
     {
         _player = GameObject.FindGameObjectWithTag("Player")?.transform;
 
-        NoiseSystem.Instance.OnNoiseEmitted += OnNoiseHeard;
+        if (NoiseSystem.Instance != null)
+            NoiseSystem.Instance.OnNoiseEmitted += OnNoiseHeard;
+
+        StartCoroutine(WaitForNavMesh());
+    }
+
+    // NavMesh is baked at runtime after maze generation.
+    // Wait until the agent is placed on it before starting patrol.
+    IEnumerator WaitForNavMesh()
+    {
+        while (!_agent.isOnNavMesh)
+            yield return null;
 
         SetState(GhostState.Patrol);
         PickNewPatrolTarget();
