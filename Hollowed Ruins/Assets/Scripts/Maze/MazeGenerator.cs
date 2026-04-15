@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MazeGenerator : MonoBehaviour
 {
@@ -57,7 +58,7 @@ public class MazeGenerator : MonoBehaviour
         var surface = GetComponent<NavMeshSurface>();
         // Collect only children of this GameObject (the spawned floor/wall tiles)
         surface.collectObjects = CollectObjects.Children;
-        surface.useGeometry    = NavMeshCollectGeometry.PhysicsColliders;
+        surface.useGeometry    = NavMeshCollectGeometry.RenderMeshes;
         surface.BuildNavMesh();
     }
 
