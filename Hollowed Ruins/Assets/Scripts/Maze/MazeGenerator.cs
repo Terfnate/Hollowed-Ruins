@@ -47,14 +47,22 @@ public class MazeGenerator : MonoBehaviour
     {
         GenerateMaze();
         BuildMesh();
-        GetComponent<NavMeshSurface>().BuildNavMesh();
+        BakeNavMesh();
         PlaceObjects();
         PositionActors();
     }
 
+    void BakeNavMesh()
+    {
+        var surface = GetComponent<NavMeshSurface>();
+        // Collect only children of this GameObject (the spawned floor/wall tiles)
+        surface.collectObjects = CollectObjects.Children;
+        surface.useGeometry    = NavMeshCollectGeometry.PhysicsColliders;
+        surface.BuildNavMesh();
+    }
+
     void PositionActors()
     {
-        // Move player and ghost to their spawn cells after NavMesh is baked
         if (player != null)
             player.position = GetPlayerSpawnWorld();
 
@@ -151,12 +159,14 @@ public class MazeGenerator : MonoBehaviour
 
     public Vector3 GetPlayerSpawnWorld()
     {
-        return CellToWorld(_playerSpawn.x, _playerSpawn.y);
+        Vector3 pos = CellToWorld(_playerSpawn.x, _playerSpawn.y);
+        return new Vector3(pos.x, 1.5f, pos.z);
     }
 
     public Vector3 GetGhostSpawnWorld()
     {
-        return CellToWorld(_ghostSpawn.x, _ghostSpawn.y);
+        Vector3 pos = CellToWorld(_ghostSpawn.x, _ghostSpawn.y);
+        return new Vector3(pos.x, 0.5f, pos.z);
     }
 
     private Vector3 CellToWorld(int x, int y)
