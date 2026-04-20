@@ -56,9 +56,8 @@ public class MazeGenerator : MonoBehaviour
     void BakeNavMesh()
     {
         var surface = GetComponent<NavMeshSurface>();
-        // Collect only children of this GameObject (the spawned floor/wall tiles)
-        surface.collectObjects = CollectObjects.Children;
-        surface.useGeometry    = NavMeshCollectGeometry.RenderMeshes;
+        surface.collectObjects = CollectObjects.All;
+        surface.useGeometry    = NavMeshCollectGeometry.PhysicsColliders;
         surface.BuildNavMesh();
     }
 
@@ -226,6 +225,13 @@ public class MazeGenerator : MonoBehaviour
     {
         Vector3 pos = CellToWorld(_ghostSpawn.x, _ghostSpawn.y);
         return new Vector3(pos.x, 0.5f, pos.z);
+    }
+
+    public Vector3 GetMazeCenterWorld()
+    {
+        float cx = (width  - 1) * 0.5f * cellSize;
+        float cz = (height - 1) * 0.5f * cellSize;
+        return new Vector3(cx, 0f, cz);
     }
 
     private Vector3 CellToWorld(int x, int y)

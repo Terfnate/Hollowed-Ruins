@@ -98,7 +98,7 @@ public class GhostAI : MonoBehaviour
             return;
         }
 
-        if (!_agent.pathPending && _agent.remainingDistance < 0.5f)
+        if (_agent.isOnNavMesh && !_agent.pathPending && _agent.remainingDistance < 0.5f)
         {
             _patrolWaiting = true;
             _patrolWaitTimer = patrolWaitTime;
