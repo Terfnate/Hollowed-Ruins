@@ -10,7 +10,7 @@ public class KeyPiece : MonoBehaviour
 
     private void Start()
     {
-        _startPos = transform.position;
+        _startPos = transform.position + Vector3.up * 1f;
     }
 
     private void Update()
@@ -22,11 +22,9 @@ public class KeyPiece : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player"))
-        {
-            return;
-        }
+        if (!other.CompareTag("Player")) return;
 
+        NoiseSystem.Instance?.EmitNoise(transform.position, 999f);
         PieceCollectionSystem.Instance?.CollectPiece();
         Destroy(gameObject);
     }

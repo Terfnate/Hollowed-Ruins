@@ -13,8 +13,8 @@ public class GhostAI : MonoBehaviour
     [SerializeField] private LayerMask sightBlockMask;  // walls layer
 
     [Header("Movement")]
-    [SerializeField] private float patrolSpeed = 2.5f;
-    [SerializeField] private float chaseSpeed  = 5f;
+    [SerializeField] private float patrolSpeed = 4f;
+    [SerializeField] private float chaseSpeed  = 8f;
 
     [Header("Patrol")]
     [SerializeField] private float patrolWaitTime = 1.5f;  // pause at each waypoint
@@ -36,6 +36,7 @@ public class GhostAI : MonoBehaviour
     void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
+        _agent.enabled = false; // keep disabled until NavMesh is baked
     }
 
     void Start()
@@ -48,12 +49,23 @@ public class GhostAI : MonoBehaviour
         StartCoroutine(WaitForNavMesh());
     }
 
-    // NavMesh is baked at runtime after maze generation.
-    // Wait until the agent is placed on it before starting patrol.
     IEnumerator WaitForNavMesh()
     {
-        while (!_agent.isOnNavMesh)
+        yield return null; // let NavMesh data register
+
+        _agent.enabled = true;
+
+        if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 10f, NavMesh.AllAreas))
+            _agent.Warp(hit.position);
+
+        float timeout = 5f;
+        while (!_agent.isOnNavMesh && timeout > 0f)
+        {
+            timeout -= Time.deltaTime;
             yield return null;
+        }
+
+        if (!_agent.isOnNavMesh) yield break;
 
         SetState(GhostState.Patrol);
         PickNewPatrolTarget();
@@ -152,16 +164,14 @@ public class GhostAI : MonoBehaviour
         if (CurrentState == GhostState.Stun) return;
 
         float dist = Vector3.Distance(transform.position, noisePosition);
-        if (dist <= noiseRadius)
-        {
-            // Investigate noise source
-            if (CurrentState == GhostState.Patrol)
-            {
-                _agent.SetDestination(noisePosition);
-                _patrolWaiting = false;
-            }
-            // If already chasing, noise doesn't override
-        }
+        if (dist > noiseRadius) return;
+
+        // Drop out of chase to investigate — key collection uses radius 999 to guarantee this
+        if (CurrentState == GhostState.Chase)
+            SetState(GhostState.Patrol);
+
+        _agent.SetDestination(noisePosition);
+        _patrolWaiting = false;
     }
 
     // ─── Catch Player ─────────────────────────────────────────────────────────

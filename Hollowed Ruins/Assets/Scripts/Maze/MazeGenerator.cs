@@ -56,7 +56,7 @@ public class MazeGenerator : MonoBehaviour
     void BakeNavMesh()
     {
         var surface = GetComponent<NavMeshSurface>();
-        surface.collectObjects = CollectObjects.All;
+        surface.collectObjects = CollectObjects.Children;
         surface.useGeometry    = NavMeshCollectGeometry.PhysicsColliders;
         surface.BuildNavMesh();
     }
@@ -224,7 +224,7 @@ public class MazeGenerator : MonoBehaviour
     public Vector3 GetGhostSpawnWorld()
     {
         Vector3 pos = CellToWorld(_ghostSpawn.x, _ghostSpawn.y);
-        return new Vector3(pos.x, 0.5f, pos.z);
+        return new Vector3(pos.x, 1.5f, pos.z);
     }
 
     public Vector3 GetMazeCenterWorld()
