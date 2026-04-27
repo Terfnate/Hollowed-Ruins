@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float walkNoiseRadius = 5f;
     [SerializeField] private float runNoiseRadius = 12f;
 
+    [Header("Animation")]
+    [SerializeField] private Animator animator;   // Reference to Remy’s Animator
+
     private CharacterController _controller;
     private PlayerInput _input;
     private InputAction _moveAction;
@@ -55,6 +58,7 @@ public class PlayerController : MonoBehaviour
         HandleMovement();
         HandleCamera();
         HandleNoise();
+        HandleAnimation();   // NEW
     }
 
     void HandleMovement()
@@ -102,6 +106,15 @@ public class PlayerController : MonoBehaviour
 
         float radius = _isRunning ? runNoiseRadius : walkNoiseRadius;
         NoiseSystem.Instance?.EmitNoise(transform.position, radius);
+    }
+
+    void HandleAnimation()
+    {
+        if (animator == null) return;
+
+        // Pass movement magnitude to Animator
+        float currentSpeed = _isMoving ? (_isRunning ? runSpeed : walkSpeed) : 0f;
+        animator.SetFloat("Speed", currentSpeed);
     }
 
     // Called externally (e.g. interact with object)
