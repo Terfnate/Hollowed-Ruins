@@ -162,6 +162,18 @@ public class ChessBoard
         }
     }
 
+    public ChessBoard Clone()
+    {
+        var clone = new ChessBoard();
+        foreach (var piece in _pieces)
+        {
+            var copy = piece.Clone();
+            clone._grid[copy.Cell.x, copy.Cell.y] = copy;
+            clone._pieces.Add(copy);
+        }
+        return clone;
+    }
+
     // ─── Helpers ──────────────────────────────────────────────────────────────
 
     bool InBounds(Vector2Int c) => c.x >= 0 && c.x < SIZE && c.y >= 0 && c.y < SIZE;

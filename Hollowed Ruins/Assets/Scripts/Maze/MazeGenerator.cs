@@ -153,6 +153,8 @@ public class MazeGenerator : MonoBehaviour
 
     private void BuildMesh()
     {
+        int notWalkable = NavMesh.GetAreaFromName("Not Walkable");
+
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
@@ -162,14 +164,22 @@ public class MazeGenerator : MonoBehaviour
                 if (_grid[x, y] == 1)
                 {
                     Spawn(floorPrefab, pos);
-                    Spawn(floorPrefab, new Vector3(pos.x, ceilingHeight, pos.z), Quaternion.Euler(180f, 0f, 0f));
+                    MarkNotWalkable(Spawn(floorPrefab, new Vector3(pos.x, ceilingHeight, pos.z), Quaternion.Euler(180f, 0f, 0f)), notWalkable);
                 }
                 else
                 {
-                    Spawn(wallPrefab, pos);
+                    MarkNotWalkable(Spawn(wallPrefab, pos), notWalkable);
                 }
             }
         }
+    }
+
+    private void MarkNotWalkable(GameObject obj, int area)
+    {
+        if (obj == null) return;
+        var mod = obj.AddComponent<NavMeshModifier>();
+        mod.overrideArea = true;
+        mod.area = area;
     }
 
     private void PlaceObjects()

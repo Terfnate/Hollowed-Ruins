@@ -48,9 +48,15 @@ public class ChessDuelManager : MonoBehaviour
     void OnStateChanged(GameState state)
     {
         if (state == GameState.ChessDuel)
-            StartDuel();
+            StartCoroutine(StartDuelNextFrame());
         else
             _duelActive = false;
+    }
+
+    IEnumerator StartDuelNextFrame()
+    {
+        yield return null; // wait for ChessBoardUI.Start() to subscribe
+        StartDuel();
     }
 
     // ─── Duel Flow ────────────────────────────────────────────────────────────

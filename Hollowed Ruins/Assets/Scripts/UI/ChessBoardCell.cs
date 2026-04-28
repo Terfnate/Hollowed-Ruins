@@ -31,8 +31,8 @@ public class ChessBoardCell : MonoBehaviour
         pieceImage.sprite  = sprite;
         pieceImage.enabled = sprite != null;
         pieceImage.color   = piece?.Color == PieceColor.White
-                             ? Color.white
-                             : new Color(0.15f, 0.15f, 0.15f);
+                             ? new Color(0.95f, 0.95f, 0.85f)
+                             : new Color(0.1f, 0.1f, 0.1f);
     }
 
     public void SetHighlight(Color color)
