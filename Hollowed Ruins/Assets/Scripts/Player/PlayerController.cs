@@ -49,16 +49,28 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        GameStateManager.Instance.OnStateChanged.AddListener(OnStateChanged);
+    }
+
+    void OnStateChanged(GameState state)
+    {
+        bool exploring = state == GameState.Exploring;
+        Cursor.lockState = exploring ? CursorLockMode.Locked : CursorLockMode.None;
+        Cursor.visible   = !exploring;
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+            GameStateManager.Instance.SetState(GameState.ChessDuel);
+
         if (!GameStateManager.Instance.IsExploring()) return;
 
         HandleMovement();
         HandleCamera();
         HandleNoise();
-        HandleAnimation();   // NEW
+        HandleAnimation();
     }
 
     void HandleMovement()

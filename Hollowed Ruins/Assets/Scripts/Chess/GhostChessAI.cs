@@ -1,45 +1,54 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-// Ghost's move selection logic.
-// Priority: capture a player piece > random legal move.
 public class GhostChessAI
 {
     private ChessBoard _board;
 
-    public GhostChessAI(ChessBoard board)
-    {
-        _board = board;
-    }
+    // King, Queen, Rook, Bishop, Knight, Pawn
+    static readonly int[] PieceValues = { 100, 9, 5, 3, 3, 1 };
 
-    // Returns (piece, targetCell) for the ghost's chosen move.
+    public GhostChessAI(ChessBoard board) => _board = board;
+
     public (ChessPiece piece, Vector2Int to) PickMove()
     {
-        var ghosts = _board.GetPiecesOf(PieceColor.Black);
+        var blackPieces = _board.GetPiecesOf(PieceColor.Black);
 
-        // Collect all moves that capture a white piece
-        var captureMoves = new List<(ChessPiece, Vector2Int)>();
-        var allMoves     = new List<(ChessPiece, Vector2Int)>();
+        ChessPiece bestPiece = null;
+        Vector2Int bestTarget = Vector2Int.zero;
+        int bestScore = int.MinValue;
 
-        foreach (var piece in ghosts)
+        foreach (var piece in blackPieces)
         {
-            var legal = _board.GetLegalMoves(piece);
-            foreach (var target in legal)
+            foreach (var target in _board.GetLegalMoves(piece))
             {
-                allMoves.Add((piece, target));
-                if (_board.GetAt(target) != null)
-                    captureMoves.Add((piece, target));
+                var clone = _board.Clone();
+                var clonedPiece = clone.GetAt(piece.Cell);
+                clone.ExecuteMove(clonedPiece, target);
+
+                int score = Evaluate(clone);
+                if (score > bestScore)
+                {
+                    bestScore = score;
+                    bestPiece = piece;
+                    bestTarget = target;
+                }
             }
         }
 
-        // Prefer captures
-        if (captureMoves.Count > 0)
-            return captureMoves[Random.Range(0, captureMoves.Count)];
+        return (bestPiece, bestTarget);
+    }
 
-        if (allMoves.Count > 0)
-            return allMoves[Random.Range(0, allMoves.Count)];
-
-        // No moves available (shouldn't happen in valid scenarios)
-        return (null, Vector2Int.zero);
+    // Positive = good for black (ghost), negative = good for white (player)
+    int Evaluate(ChessBoard board)
+    {
+        int score = 0;
+        foreach (var p in board.GetAllPieces())
+        {
+            if (p.IsCaptured) continue;
+            int val = PieceValues[(int)p.Type];
+            score += p.Color == PieceColor.Black ? val : -val;
+        }
+        return score;
     }
 }
