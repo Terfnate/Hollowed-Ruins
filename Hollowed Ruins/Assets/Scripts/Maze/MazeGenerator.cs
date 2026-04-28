@@ -106,7 +106,7 @@ public class MazeGenerator : MonoBehaviour
             int nx = x + dir.x * 2;
             int ny = y + dir.y * 2;
 
-            if (InBounds(nx, ny) && _grid[nx, ny] == 0)
+            if (InBoundsInterior(nx, ny) && _grid[nx, ny] == 0)
             {
                 _grid[x + dir.x, y + dir.y] = 1;
                 CarveFrom(nx, ny);
@@ -260,10 +260,11 @@ public class MazeGenerator : MonoBehaviour
         return corridors;
     }
 
-    private bool InBounds(int x, int y)
-    {
-        return x >= 0 && x < width && y >= 0 && y < height;
-    }
+    private bool InBounds(int x, int y) =>
+        x >= 0 && x < width && y >= 0 && y < height;
+
+    private bool InBoundsInterior(int x, int y) =>
+        x > 0 && x < width - 1 && y > 0 && y < height - 1;
 
     private GameObject Spawn(GameObject prefab, Vector3 position) =>
         Spawn(prefab, position, Quaternion.identity);
