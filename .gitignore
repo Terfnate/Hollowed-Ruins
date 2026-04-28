@@ -80,3 +80,9 @@ crashlytics-build.properties
 [Aa]ssets/[Bb]urst*
 /.obsidian
 /Ignore
+
+# ===========================
+# Claude / AI Tools
+# ===========================
+docs/superpowers/
+.claude/

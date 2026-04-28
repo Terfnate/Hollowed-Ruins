@@ -71,6 +71,9 @@ public class MinimapController : MonoBehaviour
     {
         yield return null;
         if (Camera.main != null)
+        {
             Camera.main.cullingMask &= ~(1 << MinimapLayer);
+            Camera.main.cullingMask &= ~(1 << 30);
+        }
     }
 }

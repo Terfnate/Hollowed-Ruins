@@ -47,7 +47,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 8
+  m_Speed: 10
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -71,13 +71,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb36c06f8a29b9e4f9c1e2638fa2c366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GhostAI
-  sightRange: 8
-  sightAngle: 90
+  sightRange: 20
+  sightAngle: 120
   sightBlockMask:
     serializedVersion: 2
     m_Bits: 8
   patrolSpeed: 10
-  chaseSpeed: 5
+  chaseSpeed: 8
   patrolWaitTime: 0
   patrolRadius: 400
   stunDuration: 3

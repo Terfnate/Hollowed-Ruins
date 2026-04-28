@@ -11,6 +11,7 @@ public class MazeGenerator : MonoBehaviour
     [SerializeField] private int width = 7;
     [SerializeField] private int height = 7;
     [SerializeField] private float cellSize = 4f;
+    [SerializeField] private float ceilingHeight = 20f;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject floorPrefab;
@@ -51,6 +52,7 @@ public class MazeGenerator : MonoBehaviour
         BakeNavMesh();
         PlaceObjects();
         PositionActors();
+        GetComponent<MinimapFog>()?.OnMazeReady(width, height, cellSize, _playerSpawn);
     }
 
     void BakeNavMesh()
@@ -160,6 +162,7 @@ public class MazeGenerator : MonoBehaviour
                 if (_grid[x, y] == 1)
                 {
                     Spawn(floorPrefab, pos);
+                    Spawn(floorPrefab, new Vector3(pos.x, ceilingHeight, pos.z), Quaternion.Euler(180f, 0f, 0f));
                 }
                 else
                 {
@@ -262,14 +265,13 @@ public class MazeGenerator : MonoBehaviour
         return x >= 0 && x < width && y >= 0 && y < height;
     }
 
-    private GameObject Spawn(GameObject prefab, Vector3 position)
-    {
-        if (prefab == null)
-        {
-            return null;
-        }
+    private GameObject Spawn(GameObject prefab, Vector3 position) =>
+        Spawn(prefab, position, Quaternion.identity);
 
-        GameObject obj = Instantiate(prefab, position, Quaternion.identity, transform);
+    private GameObject Spawn(GameObject prefab, Vector3 position, Quaternion rotation)
+    {
+        if (prefab == null) return null;
+        GameObject obj = Instantiate(prefab, position, rotation, transform);
         _spawnedObjects.Add(obj);
         return obj;
     }
