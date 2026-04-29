@@ -1338,10 +1338,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MazeGenerator
   width: 10
   height: 10
-  cellSize: 20
+  cellSize: 10
   ceilingHeight: 10
-  floorPrefab: {fileID: 6558783123155753158, guid: 3d5352d08d58a23409755bd88e0cf87c, type: 3}
-  wallPrefab: {fileID: 1389954772734335899, guid: 295c1309eb1a3c849aaca707f639ec9b, type: 3}
+  floorPrefab: {fileID: 6558783123155753158, guid: 55de7be3a9489d947ab4f72fe1f10417, type: 3}
+  wallPrefab: {fileID: 1389954772734335899, guid: cb4769e322a96d64d896e54bf3495195, type: 3}
   keyPiecePrefab: {fileID: 374289202576707483, guid: 78df1db2fbc8ec64f949fac0c05bf693, type: 3}
   exitPrefab: {fileID: 4709745602931901979, guid: 4092cc99014045b4cb2380915ade40e2, type: 3}
   keyPieceCount: 3
@@ -1400,9 +1400,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 90026549735736841, guid: 68e0ab649d3b97f469143e79fbc97b5e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.4083
+      objectReference: {fileID: 0}
     - target: {fileID: 1030137371576211762, guid: 68e0ab649d3b97f469143e79fbc97b5e, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2680154029812558776, guid: 68e0ab649d3b97f469143e79fbc97b5e, type: 3}
+      propertyPath: m_Radius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2680154029812558776, guid: 68e0ab649d3b97f469143e79fbc97b5e, type: 3}
+      propertyPath: m_Center.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5285946450822576670, guid: 68e0ab649d3b97f469143e79fbc97b5e, type: 3}
       propertyPath: m_Speed
@@ -1469,6 +1481,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1642038206534578122, guid: b9e76253a0f34bb459ea6961013b0593, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2971515726589722615, guid: b9e76253a0f34bb459ea6961013b0593, type: 3}
       propertyPath: m_Name
       value: UI Canvas
@@ -1576,7 +1592,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 640688084894138870, guid: 90ef77a1a22d5d94e98d8263e6c5662d, type: 3}
       propertyPath: m_Volume
-      value: 0.06
+      value: 0.66
       objectReference: {fileID: 0}
     - target: {fileID: 640688084894138870, guid: 90ef77a1a22d5d94e98d8263e6c5662d, type: 3}
       propertyPath: MaxDistance

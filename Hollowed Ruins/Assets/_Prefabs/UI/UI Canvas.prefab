@@ -1220,7 +1220,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -800, y: -450}
-  m_SizeDelta: {x: 150, y: 150}
+  m_SizeDelta: {x: 300, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4873560499638061094
 CanvasRenderer:
@@ -1881,6 +1881,9 @@ MonoBehaviour:
   heartbeatSpeed: 1.8
   overlayMinAlpha: 0
   overlayMaxAlpha: 0.4
+  dashIndicator: {fileID: 2859022762622624486}
+  dashCooldownFill: {fileID: 5732118693913272773}
+  dashCooldownText: {fileID: 2656296123525513322}
 --- !u!1 &4928024633698896500
 GameObject:
   m_ObjectHideFlags: 0
