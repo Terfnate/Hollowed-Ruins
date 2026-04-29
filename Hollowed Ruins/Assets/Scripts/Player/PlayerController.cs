@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float rotationSpeed = 10f;
 
     [Header("Camera")]
-    [SerializeField] private Transform cameraTarget;   // empty child object the camera follows
+    [SerializeField] private Transform cameraTarget;
     [SerializeField] private float cameraSensitivity = 2f;
     [SerializeField] private float cameraMinY = -20f;
     [SerializeField] private float cameraMaxY = 60f;
@@ -21,7 +21,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float runNoiseRadius = 12f;
 
     [Header("Animation")]
-    [SerializeField] private Animator animator;   // Reference to Remy’s Animator
+    [SerializeField] private Animator animator;
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource footstepSource;   // Assign FootSteps_Run clip here
 
     private CharacterController _controller;
     private PlayerInput _input;
@@ -71,6 +74,7 @@ public class PlayerController : MonoBehaviour
         HandleCamera();
         HandleNoise();
         HandleAnimation();
+        HandleFootsteps();   // NEW
     }
 
     void HandleMovement()
@@ -81,7 +85,6 @@ public class PlayerController : MonoBehaviour
 
         float speed = _isRunning ? runSpeed : walkSpeed;
 
-        // Move direction relative to camera yaw
         Vector3 move = new Vector3(moveInput.x, 0f, moveInput.y);
         move = Quaternion.Euler(0f, _cameraYaw, 0f) * move;
 
@@ -92,7 +95,6 @@ public class PlayerController : MonoBehaviour
 
         _controller.Move((move * speed + _velocity) * Time.deltaTime);
 
-        // Rotate player to face movement direction
         if (move.sqrMagnitude > 0.01f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(move);
@@ -124,12 +126,28 @@ public class PlayerController : MonoBehaviour
     {
         if (animator == null) return;
 
-        // Pass movement magnitude to Animator
         float currentSpeed = _isMoving ? (_isRunning ? runSpeed : walkSpeed) : 0f;
         animator.SetFloat("Speed", currentSpeed);
     }
 
-    // Called externally (e.g. interact with object)
+    void HandleFootsteps()
+    {
+        if (footstepSource == null) return;
+
+        if (_isMoving)
+        {
+            // Adjust pitch based on running vs walking
+            footstepSource.pitch = _isRunning ? 1.0f : 0.7f;
+
+            if (!footstepSource.isPlaying)
+                footstepSource.Play();
+        }
+        else
+        {
+            footstepSource.Stop();
+        }
+    }
+
     public void EmitLoudNoise(float radius)
     {
         NoiseSystem.Instance?.EmitNoise(transform.position, radius);

@@ -15,18 +15,23 @@ public class ChessDuelManager : MonoBehaviour
     [Header("Ghost AI Delay")]
     [SerializeField] private float ghostMoveDelay = 1.2f;  // seconds ghost "thinks"
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource chessAudioSource;   // assign AudioSource for chess duel
+    [SerializeField] private AudioClip chessClip;            // assign Chess_duel clip
+    [SerializeField] private float fadeDuration = 1.5f;      // seconds for fade in
+
     // Events for the UI to listen to
-    public event System.Action<ChessBoard>           OnDuelStarted;
+    public event System.Action<ChessBoard> OnDuelStarted;
     public event System.Action<ChessPiece, Vector2Int> OnPlayerMoved;
     public event System.Action<ChessPiece, Vector2Int> OnGhostMoved;
-    public event System.Action<int>                  OnTurnsRemainingChanged;
+    public event System.Action<int> OnTurnsRemainingChanged;
     public UnityEvent OnPlayerWon;
     public UnityEvent OnPlayerLost;
 
-    private ChessBoard             _board;
-    private GhostChessAI           _ghostAI;
+    private ChessBoard _board;
+    private GhostChessAI _ghostAI;
     private ChessObjectiveEvaluator _evaluator;
-    private ChessScenario          _currentScenario;
+    private ChessScenario _currentScenario;
 
     private bool _playerTurn = true;
     private bool _duelActive = false;
@@ -48,9 +53,15 @@ public class ChessDuelManager : MonoBehaviour
     void OnStateChanged(GameState state)
     {
         if (state == GameState.ChessDuel)
+        {
             StartCoroutine(StartDuelNextFrame());
+        }
         else
+        {
             _duelActive = false;
+            // When duel ends, fade normal audio back in
+            StartCoroutine(FadeInAllAudio());
+        }
     }
 
     IEnumerator StartDuelNextFrame()
@@ -80,18 +91,54 @@ public class ChessDuelManager : MonoBehaviour
 
         OnDuelStarted?.Invoke(_board);
         OnTurnsRemainingChanged?.Invoke(_evaluator.TurnsRemaining);
+
+        // Play chess duel audio with fade in and looping
+        if (chessAudioSource != null && chessClip != null)
+        {
+            chessAudioSource.clip = chessClip;
+            chessAudioSource.loop = true;   // keep looping until duel ends
+            chessAudioSource.volume = 0f;
+            chessAudioSource.Play();
+            StartCoroutine(FadeInSource(chessAudioSource));
+        }
+    }
+
+    // ─── Fade Helpers ─────────────────────────────────────────────────────────
+
+    IEnumerator FadeInAllAudio()
+    {
+        float t = 0f;
+        while (t < fadeDuration)
+        {
+            t += Time.unscaledDeltaTime;
+            AudioListener.volume = Mathf.Lerp(0f, 1f, t / fadeDuration);
+            yield return null;
+        }
+        AudioListener.volume = 1f;
+    }
+
+    IEnumerator FadeInSource(AudioSource src)
+    {
+        if (src == null) yield break;
+
+        float t = 0f;
+        while (t < fadeDuration)
+        {
+            t += Time.unscaledDeltaTime;
+            src.volume = Mathf.Lerp(0f, 1f, t / fadeDuration);
+            yield return null;
+        }
+        src.volume = 1f;
     }
 
     // ─── Player Input ─────────────────────────────────────────────────────────
 
-    // Called by ChessBoardUI when the player clicks a cell.
     public void OnCellClicked(Vector2Int cell)
     {
         if (!_duelActive || !_playerTurn) return;
 
         ChessPiece clicked = _board.GetAt(cell);
 
-        // Select own piece
         if (clicked != null && clicked.Color == PieceColor.White)
         {
             _selectedPiece = clicked;
@@ -99,7 +146,6 @@ public class ChessDuelManager : MonoBehaviour
             return;
         }
 
-        // Execute move
         if (_selectedPiece != null && _selectedMoves.Contains(cell))
         {
             ChessPiece captured = _board.ExecuteMove(_selectedPiece, cell);
@@ -122,7 +168,6 @@ public class ChessDuelManager : MonoBehaviour
         }
         else
         {
-            // Deselect
             _selectedPiece = null;
             _selectedMoves.Clear();
         }
@@ -142,7 +187,6 @@ public class ChessDuelManager : MonoBehaviour
 
         if (piece == null)
         {
-            // Ghost has no moves — player wins
             ResolveDuel(ObjectiveResult.PlayerWin);
             yield break;
         }
@@ -174,15 +218,19 @@ public class ChessDuelManager : MonoBehaviour
         {
             OnPlayerLost?.Invoke();
             HealthSystem.Instance.LoseHeart();
-            // Only resume if still alive
             if (GameStateManager.Instance.CurrentState != GameState.GameOver)
                 StartCoroutine(ResumeAfterLoss());
+        }
+
+        // Stop chess duel audio when duel ends
+        if (chessAudioSource != null && chessAudioSource.isPlaying)
+        {
+            chessAudioSource.Stop();
         }
     }
 
     IEnumerator ResumeAfterWin()
     {
-        // Give time for scream/stun animation to play
         yield return new WaitForSecondsRealtime(1.5f);
 
         GhostAI ghost = FindFirstObjectByType<GhostAI>();

@@ -9,19 +9,24 @@ public class GhostAI : MonoBehaviour
 
     [Header("Detection")]
     [SerializeField] private float sightRange = 8f;
-    [SerializeField] private float sightAngle = 90f;   // half-angle of view cone
-    [SerializeField] private LayerMask sightBlockMask;  // walls layer
+    [SerializeField] private float sightAngle = 90f;
+    [SerializeField] private LayerMask sightBlockMask;
 
     [Header("Movement")]
     [SerializeField] private float patrolSpeed = 4f;
     [SerializeField] private float chaseSpeed  = 8f;
 
     [Header("Patrol")]
-    [SerializeField] private float patrolWaitTime = 1.5f;  // pause at each waypoint
-    [SerializeField] private float patrolRadius   = 10f;   // random wander radius
+    [SerializeField] private float patrolWaitTime = 1.5f;
+    [SerializeField] private float patrolRadius   = 10f;
 
     [Header("Stun")]
     [SerializeField] private float stunDuration = 3f;
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;      // Assign AudioSource on Ghost prefab
+    [SerializeField] private AudioClip ghostAlertClip;     // Assign Ghost_Alert
+    [SerializeField] private AudioClip ghostRoarClip;      // Assign Ghost_Roar
 
     public GhostState CurrentState { get; private set; } = GhostState.Patrol;
 
@@ -36,7 +41,7 @@ public class GhostAI : MonoBehaviour
     void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
-        _agent.enabled = false; // keep disabled until NavMesh is baked
+        _agent.enabled = false;
     }
 
     void Start()
@@ -47,11 +52,15 @@ public class GhostAI : MonoBehaviour
             NoiseSystem.Instance.OnNoiseEmitted += OnNoiseHeard;
 
         StartCoroutine(WaitForNavMesh());
+
+        // Start periodic roar
+        if (audioSource != null && ghostRoarClip != null)
+            StartCoroutine(RoarRoutine());
     }
 
     IEnumerator WaitForNavMesh()
     {
-        yield return null; // let NavMesh data register
+        yield return null;
 
         _agent.enabled = true;
 
@@ -96,6 +105,7 @@ public class GhostAI : MonoBehaviour
         if (CanSeePlayer())
         {
             SetState(GhostState.Chase);
+            PlayGhostAlert();   // NEW: play alert when chase begins
             return;
         }
 
@@ -123,7 +133,6 @@ public class GhostAI : MonoBehaviour
 
         _agent.SetDestination(_player.position);
 
-        // Lost sight and player is far — go back to patrol
         if (!CanSeePlayer() && Vector3.Distance(transform.position, _player.position) > sightRange * 1.5f)
         {
             SetState(GhostState.Patrol);
@@ -152,7 +161,6 @@ public class GhostAI : MonoBehaviour
         float angle = Vector3.Angle(transform.forward, toPlayer);
         if (angle > sightAngle) return false;
 
-        // Raycast to check for walls blocking sight
         if (Physics.Raycast(transform.position + Vector3.up, toPlayer.normalized, distance, sightBlockMask))
             return false;
 
@@ -166,15 +174,12 @@ public class GhostAI : MonoBehaviour
         float dist = Vector3.Distance(transform.position, noisePosition);
         if (dist > noiseRadius) return;
 
-        // Drop out of chase to investigate — key collection uses radius 999 to guarantee this
         if (CurrentState == GhostState.Chase)
             SetState(GhostState.Patrol);
 
         _agent.SetDestination(noisePosition);
         _patrolWaiting = false;
     }
-
-    // ─── Catch Player ─────────────────────────────────────────────────────────
 
     void OnTriggerEnter(Collider other)
     {
@@ -183,8 +188,6 @@ public class GhostAI : MonoBehaviour
 
         GameStateManager.Instance.SetState(GameState.ChessDuel);
     }
-
-    // ─── Public API ───────────────────────────────────────────────────────────
 
     public void Stun()
     {
@@ -223,6 +226,24 @@ public class GhostAI : MonoBehaviour
         {
             _patrolTarget = hit.position;
             _agent.SetDestination(_patrolTarget);
+        }
+    }
+
+    // ─── Audio ────────────────────────────────────────────────────────────────
+
+    void PlayGhostAlert()
+    {
+        if (audioSource != null && ghostAlertClip != null)
+            audioSource.PlayOneShot(ghostAlertClip);
+    }
+
+    IEnumerator RoarRoutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(60f);
+            if (audioSource != null && ghostRoarClip != null)
+                audioSource.PlayOneShot(ghostRoarClip);
         }
     }
 }
