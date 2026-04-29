@@ -207,7 +207,8 @@ public class MazeGenerator : MonoBehaviour
 
         // Exit
         _exitCell   = corridors[idx++];
-        _exitObject = Spawn(exitPrefab, CellToWorld(_exitCell.x, _exitCell.y));
+        Vector3 exitPos = CellToWorld(_exitCell.x, _exitCell.y);
+        _exitObject = Spawn(exitPrefab, new Vector3(exitPos.x, 1f, exitPos.z));
         if (_exitObject != null)
             _exitObject.SetActive(false);
 

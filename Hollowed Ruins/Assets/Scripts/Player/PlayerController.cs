@@ -26,6 +26,13 @@ public class PlayerController : MonoBehaviour
     [Header("Audio")]
     [SerializeField] private AudioSource footstepSource;   // Assign FootSteps_Run clip here
 
+    [Header("Last Heart Mode")]
+    [SerializeField] private float lastHeartSpeedMultiplier = 1.3f;
+    [SerializeField] private float jumpForce = 7f;
+    [SerializeField] private float dashSpeed = 22f;
+    [SerializeField] private float dashDuration = 0.2f;
+    [SerializeField] private float dashCooldown = 30f;
+
     private CharacterController _controller;
     private PlayerInput _input;
     private InputAction _moveAction;
@@ -38,6 +45,14 @@ public class PlayerController : MonoBehaviour
 
     private bool _isMoving;
     private bool _isRunning;
+    private bool _lastHeartMode;
+    private bool _isDashing;
+    private float _dashTimer;
+    private float _dashCooldownTimer;
+    private Vector3 _dashDirection;
+
+    public float DashCooldownRemaining => _dashCooldownTimer;
+    public bool DashReady => _lastHeartMode && !_isDashing && _dashCooldownTimer <= 0f;
 
     void Awake()
     {
@@ -54,6 +69,18 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
 
         GameStateManager.Instance.OnStateChanged.AddListener(OnStateChanged);
+        HealthSystem.Instance.OnHeartsChanged.AddListener(OnHeartsChanged);
+    }
+
+    void OnDestroy()
+    {
+        if (HealthSystem.Instance != null)
+            HealthSystem.Instance.OnHeartsChanged.RemoveListener(OnHeartsChanged);
+    }
+
+    void OnHeartsChanged(int hearts)
+    {
+        _lastHeartMode = hearts == 1;
     }
 
     void OnStateChanged(GameState state)
@@ -67,6 +94,9 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
             GameStateManager.Instance.SetState(GameState.ChessDuel);
+
+        if (Input.GetKeyDown(KeyCode.L))
+            HealthSystem.Instance.LoseHeart();
 
         if (!GameStateManager.Instance.IsExploring()) return;
 
@@ -83,19 +113,52 @@ public class PlayerController : MonoBehaviour
         _isRunning = _runAction.IsPressed();
         _isMoving = moveInput.sqrMagnitude > 0.01f;
 
-        float speed = _isRunning ? runSpeed : walkSpeed;
+        // Tick cooldown
+        if (_dashCooldownTimer > 0f)
+            _dashCooldownTimer -= Time.deltaTime;
 
-        Vector3 move = new Vector3(moveInput.x, 0f, moveInput.y);
-        move = Quaternion.Euler(0f, _cameraYaw, 0f) * move;
+        // Initiate dash (Q) — last heart only, grounded or airborne
+        if (_lastHeartMode && !_isDashing && _dashCooldownTimer <= 0f &&
+            Keyboard.current.qKey.wasPressedThisFrame)
+        {
+            Vector3 dir = Quaternion.Euler(0f, _cameraYaw, 0f) * new Vector3(moveInput.x, 0f, moveInput.y);
+            _dashDirection = dir.sqrMagnitude > 0.01f ? dir.normalized : transform.forward;
+            _isDashing = true;
+            _dashTimer = dashDuration;
+            _dashCooldownTimer = dashCooldown;
+        }
 
+        // Resolve horizontal movement
+        Vector3 move;
+        float speed;
+
+        if (_isDashing)
+        {
+            _dashTimer -= Time.deltaTime;
+            if (_dashTimer <= 0f) _isDashing = false;
+            move  = _dashDirection;
+            speed = dashSpeed;
+        }
+        else
+        {
+            move  = Quaternion.Euler(0f, _cameraYaw, 0f) * new Vector3(moveInput.x, 0f, moveInput.y);
+            speed = _isRunning ? runSpeed : walkSpeed;
+            if (_lastHeartMode && _isRunning)
+                speed *= lastHeartSpeedMultiplier;
+        }
+
+        // Vertical
         if (_controller.isGrounded && _velocity.y < 0f)
             _velocity.y = -2f;
+
+        if (_lastHeartMode && _controller.isGrounded && Keyboard.current.spaceKey.wasPressedThisFrame)
+            _velocity.y = jumpForce;
 
         _velocity.y += gravity * Time.deltaTime;
 
         _controller.Move((move * speed + _velocity) * Time.deltaTime);
 
-        if (move.sqrMagnitude > 0.01f)
+        if (!_isDashing && move.sqrMagnitude > 0.01f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(move);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
@@ -126,7 +189,13 @@ public class PlayerController : MonoBehaviour
     {
         if (animator == null) return;
 
-        float currentSpeed = _isMoving ? (_isRunning ? runSpeed : walkSpeed) : 0f;
+        float currentSpeed = 0f;
+        if (_isMoving)
+        {
+            currentSpeed = _isRunning ? runSpeed : walkSpeed;
+            if (_lastHeartMode && _isRunning)
+                currentSpeed *= lastHeartSpeedMultiplier;
+        }
         animator.SetFloat("Speed", currentSpeed);
     }
 

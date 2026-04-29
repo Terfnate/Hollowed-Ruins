@@ -245,6 +245,10 @@ public class ChessDuelManager : MonoBehaviour
     IEnumerator ResumeAfterLoss()
     {
         yield return new WaitForSecondsRealtime(1f);
+
+        GhostAI ghost = FindFirstObjectByType<GhostAI>();
+        ghost?.Stun();
+
         GameStateManager.Instance.SetState(GameState.Exploring);
     }
 }
