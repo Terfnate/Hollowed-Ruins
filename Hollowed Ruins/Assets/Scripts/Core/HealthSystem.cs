@@ -27,6 +27,12 @@ public class HealthSystem : MonoBehaviour
         CurrentHearts = maxHearts;
     }
 
+    public void ResetHearts()
+    {
+        CurrentHearts = maxHearts;
+        OnHeartsChanged?.Invoke(CurrentHearts);
+    }
+
     public void LoseHeart()
     {
         CurrentHearts--;

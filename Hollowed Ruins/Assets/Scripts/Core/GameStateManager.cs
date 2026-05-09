@@ -13,6 +13,9 @@ public class GameStateManager : MonoBehaviour
 {
     public static GameStateManager Instance { get; private set; }
 
+    [Header("Level Config")]
+    [SerializeField] public LevelConfig levelConfig;
+
     public GameState CurrentState { get; private set; } = GameState.Exploring;
 
     public UnityEvent<GameState> OnStateChanged;
@@ -54,4 +57,10 @@ public class GameStateManager : MonoBehaviour
 
     public bool IsExploring() => CurrentState == GameState.Exploring;
     public bool IsInChessDuel() => CurrentState == GameState.ChessDuel;
+
+    public void ResetForRestart()
+    {
+        CurrentState = GameState.Exploring;
+        Time.timeScale = 1f;
+    }
 }

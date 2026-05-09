@@ -40,6 +40,16 @@ public class PieceCollectionSystem : MonoBehaviour
         MazeGenerator.Instance?.RevealExit();
     }
 
+    public void SetTotal(int total)
+    {
+        totalPieces = total;
+    }
+
+    public void ResetPieces()
+    {
+        CollectedCount = 0;
+    }
+
     public bool AllCollected()
     {
         return CollectedCount >= totalPieces;

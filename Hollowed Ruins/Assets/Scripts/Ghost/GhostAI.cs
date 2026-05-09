@@ -46,6 +46,13 @@ public class GhostAI : MonoBehaviour
 
     void Start()
     {
+        var cfg = GameStateManager.Instance?.levelConfig;
+        if (cfg != null)
+        {
+            patrolSpeed = cfg.ghostPatrolSpeed;
+            chaseSpeed  = cfg.ghostChaseSpeed;
+        }
+
         _player = GameObject.FindGameObjectWithTag("Player")?.transform;
 
         if (NoiseSystem.Instance != null)
@@ -193,6 +200,38 @@ public class GhostAI : MonoBehaviour
     {
         _stunTimer = stunDuration;
         SetState(GhostState.Stun);
+    }
+
+    public void Vanish(float duration)
+    {
+        StartCoroutine(VanishRoutine(duration));
+    }
+
+    IEnumerator VanishRoutine(float duration)
+    {
+        SetState(GhostState.Stun);
+
+        var renderers  = GetComponentsInChildren<Renderer>();
+        var colliders  = GetComponentsInChildren<Collider>();
+        foreach (var r in renderers) r.enabled = false;
+        foreach (var c in colliders) c.enabled = false;
+
+        yield return new WaitForSeconds(duration);
+
+        if (MazeGenerator.Instance != null)
+        {
+            Vector3 pos = MazeGenerator.Instance.GetRandomCorridorWorld();
+            if (_agent.isOnNavMesh)
+                _agent.Warp(pos);
+            else
+                transform.position = pos;
+        }
+
+        foreach (var r in renderers) r.enabled = true;
+        foreach (var c in colliders) c.enabled = true;
+
+        SetState(GhostState.Patrol);
+        PickNewPatrolTarget();
     }
 
     // ─── Helpers ──────────────────────────────────────────────────────────────

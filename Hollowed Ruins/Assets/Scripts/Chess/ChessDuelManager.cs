@@ -13,7 +13,8 @@ public class ChessDuelManager : MonoBehaviour
     [SerializeField] private List<ChessScenario> scenarios;
 
     [Header("Ghost AI Delay")]
-    [SerializeField] private float ghostMoveDelay = 1.2f;  // seconds ghost "thinks"
+    [SerializeField] private float ghostMoveDelay     = 1.2f;
+    [SerializeField] private float ghostVanishDuration = 5f;
 
     [Header("Audio")]
     [SerializeField] private AudioSource chessAudioSource;   // assign AudioSource for chess duel
@@ -155,7 +156,7 @@ public class ChessDuelManager : MonoBehaviour
             _selectedMoves.Clear();
             _playerTurn = false;
 
-            ObjectiveResult result = _evaluator.Evaluate(_board, captured);
+            ObjectiveResult result = _evaluator.EvaluateAfterPlayerMove(_board, captured);
             OnTurnsRemainingChanged?.Invoke(_evaluator.TurnsRemaining);
 
             if (result != ObjectiveResult.Ongoing)
@@ -194,7 +195,7 @@ public class ChessDuelManager : MonoBehaviour
         ChessPiece captured = _board.ExecuteMove(piece, to);
         OnGhostMoved?.Invoke(piece, to);
 
-        ObjectiveResult result = _evaluator.Evaluate(_board, captured);
+        ObjectiveResult result = _evaluator.EvaluateAfterGhostMove(_board, captured);
         OnTurnsRemainingChanged?.Invoke(_evaluator.TurnsRemaining);
 
         if (result != ObjectiveResult.Ongoing)
@@ -207,6 +208,7 @@ public class ChessDuelManager : MonoBehaviour
 
     void ResolveDuel(ObjectiveResult result)
     {
+        if (!_duelActive) return;
         _duelActive = false;
 
         if (result == ObjectiveResult.PlayerWin)
@@ -234,7 +236,7 @@ public class ChessDuelManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(1.5f);
 
         GhostAI ghost = FindFirstObjectByType<GhostAI>();
-        ghost?.Stun();
+        ghost?.Vanish(ghostVanishDuration);
 
         GhostAnimator anim = FindFirstObjectByType<GhostAnimator>();
         anim?.TriggerScream();

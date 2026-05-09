@@ -29,12 +29,22 @@ public class ChessBoardUI : MonoBehaviour
     private ChessBoardCell[,] _cells = new ChessBoardCell[4, 4];
     private ChessBoard _board;
 
-    void Start()
+    void OnEnable()
     {
-        ChessDuelManager.Instance.OnDuelStarted         += OnDuelStarted;
+        if (ChessDuelManager.Instance == null) return;
+        ChessDuelManager.Instance.OnDuelStarted          += OnDuelStarted;
         ChessDuelManager.Instance.OnPlayerMoved          += OnMoveExecuted;
         ChessDuelManager.Instance.OnGhostMoved           += OnMoveExecuted;
         ChessDuelManager.Instance.OnTurnsRemainingChanged += OnTurnsChanged;
+    }
+
+    void OnDisable()
+    {
+        if (ChessDuelManager.Instance == null) return;
+        ChessDuelManager.Instance.OnDuelStarted          -= OnDuelStarted;
+        ChessDuelManager.Instance.OnPlayerMoved          -= OnMoveExecuted;
+        ChessDuelManager.Instance.OnGhostMoved           -= OnMoveExecuted;
+        ChessDuelManager.Instance.OnTurnsRemainingChanged -= OnTurnsChanged;
     }
 
     // ─── Duel Start ───────────────────────────────────────────────────────────

@@ -47,6 +47,16 @@ public class MazeGenerator : MonoBehaviour
 
     private void Start()
     {
+        var cfg = GameStateManager.Instance?.levelConfig;
+        if (cfg != null)
+        {
+            width         = cfg.mazeWidth;
+            height        = cfg.mazeHeight;
+            keyPieceCount = cfg.keyPieceCount;
+        }
+
+        PieceCollectionSystem.Instance?.SetTotal(keyPieceCount);
+
         GenerateMaze();
         BuildMesh();
         BakeNavMesh();
@@ -239,6 +249,15 @@ public class MazeGenerator : MonoBehaviour
     {
         Vector3 pos = CellToWorld(_ghostSpawn.x, _ghostSpawn.y);
         return new Vector3(pos.x, 1.5f, pos.z);
+    }
+
+    public Vector3 GetRandomCorridorWorld()
+    {
+        var corridors = GetAllCorridors();
+        corridors.Remove(_playerSpawn);
+        if (corridors.Count == 0) return GetPlayerSpawnWorld();
+        var cell = corridors[Random.Range(0, corridors.Count)];
+        return new Vector3(cell.x * cellSize, 1.5f, cell.y * cellSize);
     }
 
     public Vector3 GetMazeCenterWorld()

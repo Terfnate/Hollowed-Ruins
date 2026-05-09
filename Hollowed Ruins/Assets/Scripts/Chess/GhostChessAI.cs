@@ -14,23 +14,22 @@ public class GhostChessAI
     {
         var blackPieces = _board.GetPiecesOf(PieceColor.Black);
 
-        ChessPiece bestPiece = null;
+        ChessPiece bestPiece  = null;
         Vector2Int bestTarget = Vector2Int.zero;
-        int bestScore = int.MinValue;
+        int        bestScore  = int.MinValue;
 
         foreach (var piece in blackPieces)
         {
             foreach (var target in _board.GetLegalMoves(piece))
             {
                 var clone = _board.Clone();
-                var clonedPiece = clone.GetAt(piece.Cell);
-                clone.ExecuteMove(clonedPiece, target);
+                clone.ExecuteMove(clone.GetAt(piece.Cell), target);
 
-                int score = Evaluate(clone);
+                int score = Minimax(clone, depth: 1, maximizing: false);
                 if (score > bestScore)
                 {
-                    bestScore = score;
-                    bestPiece = piece;
+                    bestScore  = score;
+                    bestPiece  = piece;
                     bestTarget = target;
                 }
             }
@@ -39,7 +38,37 @@ public class GhostChessAI
         return (bestPiece, bestTarget);
     }
 
-    // Positive = good for black (ghost), negative = good for white (player)
+    // Depth-2 minimax: ghost maximises, player minimises.
+    int Minimax(ChessBoard board, int depth, bool maximizing)
+    {
+        if (depth == 0) return Evaluate(board);
+
+        PieceColor side   = maximizing ? PieceColor.Black : PieceColor.White;
+        var        pieces = board.GetPiecesOf(side);
+
+        if (pieces.Count == 0)
+            return maximizing ? int.MinValue : int.MaxValue;
+
+        int  best     = maximizing ? int.MinValue : int.MaxValue;
+        bool hasMoves = false;
+
+        foreach (var piece in pieces)
+        {
+            foreach (var target in board.GetLegalMoves(piece))
+            {
+                hasMoves = true;
+                var clone = board.Clone();
+                clone.ExecuteMove(clone.GetAt(piece.Cell), target);
+
+                int score = Minimax(clone, depth - 1, !maximizing);
+                best = maximizing ? Mathf.Max(best, score) : Mathf.Min(best, score);
+            }
+        }
+
+        return hasMoves ? best : Evaluate(board);
+    }
+
+    // Positive = good for black (ghost).
     int Evaluate(ChessBoard board)
     {
         int score = 0;

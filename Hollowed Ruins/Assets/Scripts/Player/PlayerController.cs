@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
     private float _dashTimer;
     private float _dashCooldownTimer;
     private Vector3 _dashDirection;
+    private float _footstepStopTimer;
 
     public float DashCooldownRemaining => _dashCooldownTimer;
     public bool DashReady => _lastHeartMode && !_isDashing && _dashCooldownTimer <= 0f;
@@ -203,17 +204,22 @@ public class PlayerController : MonoBehaviour
     {
         if (footstepSource == null) return;
 
-        if (_isMoving)
-        {
-            // Adjust pitch based on running vs walking
-            footstepSource.pitch = _isRunning ? 1.0f : 0.7f;
+        footstepSource.loop = true;
 
+        bool shouldPlay = _isMoving && !_isDashing;
+
+        if (shouldPlay)
+        {
+            _footstepStopTimer = 0.12f;
+            footstepSource.pitch = _isRunning ? 1.0f : 0.7f;
             if (!footstepSource.isPlaying)
                 footstepSource.Play();
         }
         else
         {
-            footstepSource.Stop();
+            _footstepStopTimer -= Time.deltaTime;
+            if (_footstepStopTimer <= 0f && footstepSource.isPlaying)
+                footstepSource.Stop();
         }
     }
 

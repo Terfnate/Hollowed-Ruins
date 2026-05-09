@@ -39,14 +39,17 @@ public class HUDController : MonoBehaviour
             HealthSystem.Instance.OnHeartsChanged.AddListener(UpdateHearts);
 
         if (PieceCollectionSystem.Instance != null)
-            PieceCollectionSystem.Instance.OnPieceCollected += UpdatePieceCounter;
+        {
+            PieceCollectionSystem.Instance.OnPieceCollected    += UpdatePieceCounter;
+            PieceCollectionSystem.Instance.OnAllPiecesCollected += OnAllPiecesCollected;
+        }
 
         if (ghostWarningIcon != null)
             _warningGroup = ghostWarningIcon.GetComponent<CanvasGroup>();
 
         // Initialise display
         UpdateHearts(3);
-        UpdatePieceCounter(0, 5);
+        UpdatePieceCounter(0, PieceCollectionSystem.Instance?.TotalPieces ?? 5);
         ghostWarningIcon?.SetActive(false);
 
         if (lastHeartOverlay != null)
@@ -85,6 +88,12 @@ public class HUDController : MonoBehaviour
     {
         if (pieceCounterText != null)
             pieceCounterText.text = $"{collected} / {total}";
+    }
+
+    void OnAllPiecesCollected()
+    {
+        if (pieceCounterText != null)
+            pieceCounterText.text = "Find the portal!";
     }
 
     // ─── Last Heart Overlay ───────────────────────────────────────────────────

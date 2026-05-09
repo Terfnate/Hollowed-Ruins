@@ -1,19 +1,25 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// Handles Game Over and Win screen buttons.
 public class GameScreensUI : MonoBehaviour
 {
-    // Called by the Restart button on both Game Over and Win screens
+    [SerializeField] private string mainMenuSceneName = "MainMenu";
+
     public void OnRestartClicked()
     {
         Time.timeScale = 1f;
+        GameStateManager.Instance?.ResetForRestart();
+        HealthSystem.Instance?.ResetHearts();
+        PieceCollectionSystem.Instance?.ResetPieces();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    // Called by the Quit button
     public void OnQuitClicked()
     {
-        Application.Quit();
+        Time.timeScale = 1f;
+        GameStateManager.Instance?.ResetForRestart();
+        HealthSystem.Instance?.ResetHearts();
+        PieceCollectionSystem.Instance?.ResetPieces();
+        SceneManager.LoadScene(mainMenuSceneName);
     }
 }

@@ -1,0 +1,140 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1713733038730015151
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4325841482124427315}
+  - component: {fileID: 8397370179204981656}
+  - component: {fileID: 3260684291727975957}
+  - component: {fileID: 6489534322427361711}
+  - component: {fileID: 7073888315538782575}
+  - component: {fileID: 432300656844634041}
+  m_Layer: 0
+  m_Name: _Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4325841482124427315
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713733038730015151}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8397370179204981656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713733038730015151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20b69d605be4df24686ad7f8fd76150e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameStateManager
+  levelConfig: {fileID: 0}
+  OnStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &3260684291727975957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713733038730015151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f049ecf9b441b34c863c3c2dd2be1f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthSystem
+  maxHearts: 3
+  OnHeartsChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGameOver:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &6489534322427361711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713733038730015151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41d7383692457084aae7de035e957ec0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NoiseSystem
+--- !u!114 &7073888315538782575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713733038730015151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbc4363d3b0a19343a1647740d6d21a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PieceCollectionSystem
+  totalPieces: 5
+  OnAllPiecesCollectedUnity:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &432300656844634041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713733038730015151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 851f69628be260048a87d6118b5342a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChessDuelManager
+  scenarios:
+  - {fileID: 11400000, guid: 2184aa14164127c479ee23f9e792aab4, type: 2}
+  - {fileID: 11400000, guid: 9c0d2503475cb9b46a23ffd8302315d0, type: 2}
+  - {fileID: 11400000, guid: de7d5b0a90f4c3d4ca483d0d9456009f, type: 2}
+  - {fileID: 11400000, guid: 7417e382a86c3d34eb81d4c52306509a, type: 2}
+  - {fileID: 11400000, guid: 672979fe5eefcb94bb848367efeb3645, type: 2}
+  - {fileID: 11400000, guid: 5e8f376a4e2a01d48a72b81356ef257e, type: 2}
+  - {fileID: 11400000, guid: 1bf04894f137f554294217fdc7066b9c, type: 2}
+  - {fileID: 11400000, guid: 86d489ff6df49eb47962c0687663a9f0, type: 2}
+  - {fileID: 11400000, guid: 01a0f4c7376946c41adabb176e71643f, type: 2}
+  - {fileID: 11400000, guid: e1e2dc4a07880624f936c9eb3761b440, type: 2}
+  - {fileID: 11400000, guid: 4553a394163f3a64f9d21c491de39997, type: 2}
+  - {fileID: 11400000, guid: 6d72e0afc31d7b04e96f0c8f5d814e4b, type: 2}
+  - {fileID: 11400000, guid: e3913857dd4be1445ad8803936529cf3, type: 2}
+  - {fileID: 11400000, guid: 2a90c966d4c71464f8979b38be046830, type: 2}
+  - {fileID: 11400000, guid: 7c47beb282035df4ba31829ef211560d, type: 2}
+  ghostMoveDelay: 1.2
+  ghostVanishDuration: 5
+  chessAudioSource: {fileID: 0}
+  chessClip: {fileID: 0}
+  fadeDuration: 1.5
+  OnPlayerWon:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPlayerLost:
+    m_PersistentCalls:
+      m_Calls: []
