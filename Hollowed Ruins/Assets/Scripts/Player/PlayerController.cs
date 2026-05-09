@@ -96,6 +96,16 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
             GameStateManager.Instance.SetState(GameState.ChessDuel);
 
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Time.timeScale = 1f;
+            GameStateManager.Instance?.ResetForRestart();
+            HealthSystem.Instance?.ResetHearts();
+            PieceCollectionSystem.Instance?.ResetPieces();
+            UnityEngine.SceneManagement.SceneManager.LoadScene(
+                UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        }
+
         if (Input.GetKeyDown(KeyCode.L))
             HealthSystem.Instance.LoseHeart();
 

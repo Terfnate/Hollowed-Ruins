@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
@@ -61,7 +62,7 @@ public class MazeGenerator : MonoBehaviour
         BuildMesh();
         BakeNavMesh();
         PlaceObjects();
-        PositionActors();
+        StartCoroutine(PositionActorsNextFrame());
         GetComponent<MinimapFog>()?.OnMazeReady(width, height, cellSize, _playerSpawn);
     }
 
@@ -71,6 +72,12 @@ public class MazeGenerator : MonoBehaviour
         surface.collectObjects = CollectObjects.Children;
         surface.useGeometry    = NavMeshCollectGeometry.PhysicsColliders;
         surface.BuildNavMesh();
+    }
+
+    IEnumerator PositionActorsNextFrame()
+    {
+        yield return null; // wait one physics frame for colliders to register
+        PositionActors();
     }
 
     void PositionActors()

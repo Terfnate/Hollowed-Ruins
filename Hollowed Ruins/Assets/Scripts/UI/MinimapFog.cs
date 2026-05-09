@@ -13,6 +13,8 @@ public class MinimapFog : MonoBehaviour
     private int _width, _height;
     private Transform _player;
 
+    [SerializeField] private Material fogMaterial;
+
     public void OnMazeReady(int width, int height, float cellSize, Vector2Int playerSpawn)
     {
         _width = width;
@@ -21,7 +23,9 @@ public class MinimapFog : MonoBehaviour
         _fogQuads = new GameObject[width, height];
         _visited = new bool[width, height];
 
-        var mat = new Material(Shader.Find("Universal Render Pipeline/Unlit"));
+        var mat = fogMaterial != null
+            ? new Material(fogMaterial)
+            : new Material(Shader.Find("Universal Render Pipeline/Unlit"));
         mat.color = new Color(0.05f, 0.05f, 0.05f, 1f);
 
         for (int x = 0; x < width; x++)

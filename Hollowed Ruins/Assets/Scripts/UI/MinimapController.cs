@@ -13,6 +13,7 @@ public class MinimapController : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private Color markerColor = Color.cyan;
     [SerializeField] private float markerSize = 3f;
+    [SerializeField] private Material markerMaterial;
 
     private Transform _marker;
     private Camera _cam;
@@ -48,7 +49,7 @@ public class MinimapController : MonoBehaviour
     private void LateUpdate()
     {
         if (_marker != null && player != null)
-            _marker.position = new Vector3(player.position.x, 2.5f, player.position.z);
+            _marker.position = new Vector3(player.position.x, 27f, player.position.z);
     }
 
     private void CreateMarker()
@@ -59,7 +60,9 @@ public class MinimapController : MonoBehaviour
         markerGO.transform.localScale = new Vector3(markerSize, 0.1f, markerSize);
         Destroy(markerGO.GetComponent<Collider>());
 
-        var mat = new Material(Shader.Find("Universal Render Pipeline/Lit"));
+        var mat = markerMaterial != null
+            ? new Material(markerMaterial)
+            : new Material(Shader.Find("Universal Render Pipeline/Lit"));
         mat.color = markerColor;
         markerGO.GetComponent<Renderer>().material = mat;
 

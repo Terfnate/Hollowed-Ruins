@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d541e6839acb2de4e810ff42f40349fb, type: 3}
   m_Name: Medium
   m_EditorClassIdentifier: Assembly-CSharp::LevelConfig
-  mazeWidth: 15
-  mazeHeight: 15
+  mazeWidth: 14
+  mazeHeight: 14
   keyPieceCount: 4
   ghostPatrolSpeed: 5
   ghostChaseSpeed: 9
