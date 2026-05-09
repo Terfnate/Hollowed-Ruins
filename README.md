@@ -2,19 +2,87 @@
 
 Haunted-maze survival game built in Unity 6 for `CMPS434 - Game Development Course Project`.
 
-![1778347989353](images/README/1778347989353.png)
+![1778348788227](images/README/1778348788227.png)
+
+> A shifting fortress. A patient Warden. A broken seal that is the only way out.
+
+## Contents
+
+- [Game Snapshot](#game-snapshot)
+- [Player Manual](#player-manual)
+- [Story](#story)
+- [Gameplay Overview](#gameplay-overview)
+- [Level Profiles](#level-profiles)
+- [Project Overview](#project-overview)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Gameplay Systems Reference](#gameplay-systems-reference)
+- [Assets And Content](#assets-and-content)
+- [Scene Setup Expectations](#scene-setup-expectations)
+- [Production Notes](#production-notes)
+- [Credits](#credits)
+
+## Game Snapshot
+
+| Item          | Details                                                                  |
+| ------------- | ------------------------------------------------------------------------ |
+| Genre         | Third-person horror exploration / tactical puzzle                        |
+| Core Hook     | Escape a procedural maze while surviving ghost-triggered 4x4 chess duels |
+| Engine        | `Unity 6000.3.9f1`                                                       |
+| Platform      | Windows 10/11                                                            |
+| Input         | Keyboard + mouse, with Input System gamepad bindings present             |
+| Primary Goal  | Collect all key fragments, reveal the portal, and escape                 |
+| Failure State | Lose all 3 hearts by failing chess duels                                 |
 
 ## Player Manual
 
-### Game Overview
+### Game Premise
 
-You are trapped inside a haunted ruin maze. Explore the labyrinth, collect every broken key piece, reveal the exit portal, and escape before the ghost catches you.
+You are trapped inside a haunted ruin maze. Explore the labyrinth, collect every broken key piece, reveal the exit portal, and escape before the Warden catches you.
 
-If the ghost reaches you, the game shifts into a 4x4 chess duel. Winning the duel buys time and forces the ghost away. Losing the duel costs a heart. Lose all hearts and the run ends.
+If the Warden reaches you, the game shifts into a 4x4 chess duel. Winning the duel buys time and forces him away. Losing the duel costs a heart. Lose all hearts and the run ends.
 
-### Story
+### Controls
 
-#### The Legend
+| Input           | Action                                    |
+| --------------- | ----------------------------------------- |
+| `W / A / S / D` | Move                                      |
+| `Mouse`         | Look around                               |
+| `Left Shift`    | Sprint                                    |
+| `Left Click`    | Select and move chess pieces during duels |
+| `Q`             | Dash, final-heart mode only               |
+| `Space`         | Jump, final-heart mode only               |
+
+### Objective Flow
+
+1. Search the maze for key fragments.
+2. Avoid or outlast the Warden.
+3. Win chess duels when caught.
+4. Assemble the full seal.
+5. Reach the portal and escape.
+
+### Win / Lose Conditions
+
+| Result | Condition                                        |
+| ------ | ------------------------------------------------ |
+| `Win`  | Collect all key pieces and enter the exit portal |
+| `Lose` | Lose all 3 hearts by failing chess duels         |
+
+### HUD
+
+| HUD Element          | Purpose                                                       |
+| -------------------- | ------------------------------------------------------------- |
+| `Hearts`             | Top-left life display                                         |
+| `Key Counter`        | Shows progress such as`2 / 3`                                 |
+| `Portal Prompt`      | Changes to`Find the portal!` after the final key is collected |
+| `Ghost Warning`      | Pulses when the Warden is actively chasing                    |
+| `Minimap`            | Top-right tactical view with a cyan player marker             |
+| `Last Heart Overlay` | Red heartbeat screen effect on the final life                 |
+| `Dash Indicator`     | Displays emergency dash cooldown                              |
+
+## Story
+
+### The Legend
 
 Deep beneath the hills of Ashen Hollow lies a fortress no map remembers. It was built centuries ago by Lord Aldric Voss, a chess grandmaster, occultist, and tyrant who ruled through fear and ritual rather than open war.
 
@@ -24,7 +92,7 @@ No one ever defeated him.
 
 When Aldric died, he did not leave his fortress behind. His madness fused with the stone, the shadows, and the labyrinth itself. What remains is the Warden, a restless presence bound to the ruins and still searching for new prisoners to test.
 
-#### You
+### You
 
 You are an urban explorer who followed the rumors into Ashen Hollow. Buried beneath local folklore was talk of a forgotten fortress, a shattered relic, and a treasure no one ever brought back out.
 
@@ -36,7 +104,7 @@ The walls shift behind you. Torchlight dies corridor by corridor. Somewhere in t
 
 The Warden has found a new prisoner.
 
-#### The Chess Duels
+### The Chess Duels
 
 When the Warden catches you, he does not kill you. That was never his way.
 
@@ -44,9 +112,9 @@ Instead, he drags you into the ritual that defined his rule. A board forms from 
 
 Winning breaks his focus for a moment and gives you room to run.
 
-Losing costs part of what keeps you grounded in the world above. In gameplay, that cost is represented by your hearts. Three failures, and the ruins claim you like everyone before you.
+Losing costs part of what keeps you grounded in the world above. In gameplay terms, that loss becomes one heart. Three failures, and the ruins claim you like everyone before you.
 
-#### The Key And The Portal
+### The Key And The Portal
 
 The relic hidden throughout the maze is the Warden's Seal, the only object capable of opening the passage out. Aldric shattered it himself, convinced that no prisoner could ever reassemble it while being hunted inside his labyrinth.
 
@@ -61,94 +129,44 @@ Some doors were built to keep things out.
 
 This one was built to keep you in.
 
-### Unity Version
+## Gameplay Overview
 
-`Unity 6000.3.9f1 (Unity 6)`
-
-### Platform
-
-- Windows 10/11
-- Keyboard + mouse supported
-- Input System package also includes gamepad bindings
-
-### Controls
-
-- `W / A / S / D` - Move
-- `Mouse` - Look around
-- `Left Shift` - Sprint
-- `Left Click` - Select / move chess pieces during duels
-- `Q` - Dash, only when on the final heart
-- `Space` - Jump, only when on the final heart
-
-### Objective
-
-- Collect all key pieces hidden in the maze
-- Reveal the exit portal once all key pieces are collected
-- Reach the portal before losing all hearts
-
-### Win Condition
-
-- Collect all key pieces
-- Enter the exit portal
-
-### Lose Condition
-
-- Lose all 3 hearts
-- Hearts are lost only by failing chess duels
-
-### HUD
-
-- `Hearts` - top-left life display
-- `Key Counter` - shows progress such as `2 / 3`
-- `Portal Prompt` - changes to `Find the portal!` when all keys are collected
-- `Ghost Warning` - pulses while the ghost is actively chasing
-- `Minimap` - top-right tactical view with a cyan player marker
-- `Last Heart Overlay` - red heartbeat screen effect on final life
-- `Dash Indicator` - cooldown display for the emergency dash ability
-
-### The Ghost
+### The Warden
 
 - Patrols the maze using Unity NavMesh
 - Detects the player through line of sight
 - Investigates sound events emitted by movement and pickups
-- Sprinting creates larger noise than walking
-- Picking up a key piece emits a very large noise pulse, often dragging the ghost toward the pickup location
+- Responds more aggressively to sprinting than walking
+- Is strongly drawn to key pickups because they emit a large noise pulse
 
-### Chess Duel
+### Chess Duel Rules
 
-When the ghost catches the player, exploration pauses and a chess challenge begins on a 4x4 board.
+When the Warden catches the player, exploration pauses and a chess challenge begins on a 4x4 board.
 
-Possible objectives include:
+Possible duel objectives:
 
 - Survive for a number of turns
 - Protect a specified piece for a number of turns
 - Avoid losing any white piece for a number of turns
 - Capture a specified enemy piece before turns run out
 
-Results:
+Possible duel outcomes:
 
-- Win: the ghost screams, vanishes temporarily, and respawns elsewhere in the maze
-- Lose: you lose 1 heart, the ghost is briefly stunned, and exploration resumes
+- `Win`: the Warden screams, vanishes temporarily, and respawns elsewhere in the maze
+- `Lose`: the player loses 1 heart, the Warden is briefly stunned, and exploration resumes
 
-### Last Heart Mode
+### Final Heart Mode
 
 When only one heart remains:
 
-- `Q` enables a forward dash with a 30-second cooldown
+- `Q` activates a forward dash with a 30-second cooldown
 - `Space` enables jumping
 - Sprinting gains a speed multiplier
-- A heartbeat overlay appears on the HUD
+- A heartbeat overlay appears across the HUD
 
-### Level Differences
+## Level Profiles
 
-Each playable scene changes the pressure curve through:
-
-- Maze size
-- Number of key pieces required
-- Ghost patrol speed
-- Ghost chase speed
-
-Current level configs:
+Each playable scene changes the pressure curve through maze size, collectible count, and ghost speed.
 
 | Level    |  Maze | Keys | Patrol Speed | Chase Speed |
 | -------- | ----: | ---: | -----------: | ----------: |
@@ -159,9 +177,9 @@ Current level configs:
 
 ## Project Overview
 
-![1778348081069](images/README/1778348081069.png)
+![1778348821344](images/README/1778348821344.png)
 
-## High Concept
+### High Concept
 
 `Hollowed Ruins` combines third-person maze exploration with short-form tactical chess encounters. The main tension comes from alternating between spatial survival and turn-based problem solving.
 
@@ -169,13 +187,13 @@ Current level configs:
 
 1. Spawn into a procedurally generated maze.
 2. Explore, collect key pieces, and manage ghost pressure.
-3. Enter a chess duel if the ghost catches the player.
+3. Enter a chess duel if the Warden catches the player.
 4. Resume exploration after duel resolution.
 5. Escape through the revealed portal.
 
 ### Build Scenes
 
-Configured build scenes in `ProjectSettings/EditorBuildSettings.asset`:
+Configured build scenes from `ProjectSettings/EditorBuildSettings.asset`:
 
 - `Assets/_Scenes/MainMenu.unity`
 - `Assets/_Scenes/LevelTutorial.unity`
@@ -183,14 +201,16 @@ Configured build scenes in `ProjectSettings/EditorBuildSettings.asset`:
 - `Assets/_Scenes/LevelMedium.unity`
 - `Assets/_Scenes/LevelHard.unity`
 
-## Opening The Project
+## Getting Started
+
+### Opening The Project
 
 1. Open Unity Hub.
 2. Add the folder `Hollowed Ruins`.
 3. Open the project with `Unity 6000.3.9f1`.
 4. Load `Assets/_Scenes/MainMenu.unity` to start from the intended front end.
 
-Primary packages in use:
+### Primary Packages
 
 - `com.unity.inputsystem`
 - `com.unity.cinemachine`
@@ -199,37 +219,40 @@ Primary packages in use:
 - `com.unity.ugui`
 - `com.unity.textmeshpro`
 
-## Directory Guide
+## Project Structure
 
 ### High-Value Folders
 
-- `Hollowed Ruins/Assets/_Scenes` - main menu and gameplay scenes
-- `Hollowed Ruins/Assets/_Scenes/Levels Config` - per-difficulty `LevelConfig` assets
-- `Hollowed Ruins/Assets/Scripts` - gameplay code
-- `Hollowed Ruins/Assets/Audio` - ambient, music, and ghost SFX
-- `Hollowed Ruins/Assets/Art` - character art, animation controllers, materials, and textures
-- `Hollowed Ruins/Assets/UI` - UI sprites and fonts
-- `Hollowed Ruins/Assets/DungeonModularPack` - modular environment art used to build the maze
-- `docs` - design and script reference documents
+| Path                                          | Purpose                                                       |
+| --------------------------------------------- | ------------------------------------------------------------- |
+| `Hollowed Ruins/Assets/_Scenes`               | Main menu and gameplay scenes                                 |
+| `Hollowed Ruins/Assets/_Scenes/Levels Config` | Per-difficulty`LevelConfig` assets                            |
+| `Hollowed Ruins/Assets/Scripts`               | Gameplay code                                                 |
+| `Hollowed Ruins/Assets/Audio`                 | Ambient, music, and ghost SFX                                 |
+| `Hollowed Ruins/Assets/Art`                   | Character art, materials, textures, and animation controllers |
+| `Hollowed Ruins/Assets/UI`                    | HUD sprites and fonts                                         |
+| `Hollowed Ruins/Assets/DungeonModularPack`    | Modular environment kit used by the maze builder              |
+| `docs`                                        | Design and script reference documents                         |
 
-### Core Runtime Script Layout
+### Runtime Code Layout
 
-- `Scripts/Core` - game state, health, noise, level tuning
-- `Scripts/Player` - player movement and spawn logic
-- `Scripts/Maze` - procedural generation, key placement, exit flow
-- `Scripts/Ghost` - AI, animation bridge, ghost spawn support
-- `Scripts/Chess` - duel logic, board model, scenarios, evaluator, AI
-- `Scripts/UI` - HUD, minimap, menus, duel board, end screens
+| Folder           | Responsibility                                        |
+| ---------------- | ----------------------------------------------------- |
+| `Scripts/Core`   | Game state, health, noise, level tuning               |
+| `Scripts/Player` | Player movement and spawn support                     |
+| `Scripts/Maze`   | Procedural generation, objective placement, exit flow |
+| `Scripts/Ghost`  | AI, animation bridge, spawn support                   |
+| `Scripts/Chess`  | Duel rules, board model, scenarios, evaluator, AI     |
+| `Scripts/UI`     | HUD, minimap, menus, duel board, end screens          |
 
 ## Gameplay Systems Reference
 
-This section is written in the style of a production handoff: what each system owns, what must be assigned in the Inspector, and why it exists.
+This section is written as a production handoff: what each system owns, what it depends on, and why it matters to the game.
 
 ### 1. State Management
 
 #### `GameStateManager`
 
-Role:
 Central authority for game flow. All major systems query or react to `Exploring`, `ChessDuel`, `GameOver`, and `Win`.
 
 Key responsibilities:
@@ -241,7 +264,6 @@ Key responsibilities:
 
 #### `HealthSystem`
 
-Role:
 Owns the player's heart economy.
 
 Key responsibilities:
@@ -252,7 +274,6 @@ Key responsibilities:
 
 #### `NoiseSystem`
 
-Role:
 Simple event bus for sound-driven gameplay.
 
 Key responsibilities:
@@ -262,7 +283,6 @@ Key responsibilities:
 
 #### `LevelConfig`
 
-Role:
 ScriptableObject that defines difficulty tuning per level.
 
 Fields:
@@ -277,7 +297,6 @@ Fields:
 
 #### `PlayerController`
 
-Role:
 Primary exploration controller.
 
 Required components:
@@ -303,23 +322,18 @@ Major features:
 
 Notable implementation details:
 
-- `DashCooldownRemaining` and `DashReady` expose player status to HUD systems cleanly
+- `DashCooldownRemaining` and `DashReady` expose player status cleanly to HUD systems
 - `EmitLoudNoise(float radius)` provides an explicit hook for future interactables
 - Debug keys currently exist in `Update()`: `P` forces a chess duel and `L` removes a heart
 
 #### `PlayerSpawner`
 
-Role:
 Legacy utility for spawning a prefab at a `PlayerSpawn` marker.
-
-Current status:
-The procedural maze flow already positions the player through `MazeGenerator.PositionActors()`. This spawner is useful only if the project returns to marker-based spawning.
 
 ### 3. Maze Generation And Objective Layer
 
 #### `MazeGenerator`
 
-Role:
 Builds the maze at runtime and places mission-critical actors and objectives.
 
 Required dependencies:
@@ -339,12 +353,8 @@ Major features:
 - Places the player, ghost, exit, and key pieces
 - Notifies `MinimapFog` once the layout is ready
 
-Production value:
-This script is effectively the level bootstrapper. It owns both layout generation and mission placement, which makes it the most important scene setup script in the project.
-
 #### `PieceCollectionSystem`
 
-Role:
 Tracks objective progress.
 
 Responsibilities:
@@ -356,7 +366,6 @@ Responsibilities:
 
 #### `KeyPiece`
 
-Role:
 Collectible actor attached to the key prefab.
 
 Behavior:
@@ -369,7 +378,6 @@ Behavior:
 
 #### `ExitTrigger`
 
-Role:
 Win-condition gate attached to the exit portal.
 
 Behavior:
@@ -381,7 +389,6 @@ Behavior:
 
 #### `GhostAI`
 
-Role:
 Primary enemy behavior controller.
 
 Required components:
@@ -417,7 +424,6 @@ Important design note:
 
 #### `GhostAnimator`
 
-Role:
 Bridges AI state into animation parameters.
 
 Responsibilities:
@@ -430,11 +436,7 @@ Responsibilities:
 
 #### `GhostSpawner`
 
-Role:
 Additional spawn utility for `GhostSpawn` markers.
-
-Current status:
-Not part of the procedural single-ghost loop used by `MazeGenerator`, but valuable if the project expands into multi-ghost scenarios.
 
 ### 5. Chess Duel Layer
 
@@ -442,7 +444,6 @@ This subsystem is the identity feature of the project. It is cleanly split betwe
 
 #### `ChessDuelManager`
 
-Role:
 Top-level duel orchestrator.
 
 Responsibilities:
@@ -463,7 +464,6 @@ Important runtime behavior:
 
 #### `ChessBoard`
 
-Role:
 Pure board-state model.
 
 Responsibilities:
@@ -485,7 +485,6 @@ Supported piece logic:
 
 #### `ChessData`
 
-Role:
 Shared enums and serializable data containers for the duel feature.
 
 Includes:
@@ -499,7 +498,6 @@ Includes:
 
 #### `ChessScenario`
 
-Role:
 Designer-authored ScriptableObject used to build an encounter.
 
 Contains:
@@ -510,7 +508,6 @@ Contains:
 
 #### `ChessObjectiveEvaluator`
 
-Role:
 Evaluates duel success and failure conditions.
 
 Supported objective types:
@@ -522,7 +519,6 @@ Supported objective types:
 
 #### `GhostChessAI`
 
-Role:
 Turn-selection logic for the ghost.
 
 Implementation:
@@ -535,7 +531,6 @@ Implementation:
 
 #### `UIManager`
 
-Role:
 Activates the correct screen for each game state.
 
 Panels:
@@ -547,7 +542,6 @@ Panels:
 
 #### `HUDController`
 
-Role:
 Owns the live exploration HUD.
 
 Dependencies:
@@ -569,7 +563,6 @@ Responsibilities:
 
 #### `ChessBoardUI`
 
-Role:
 Visual front end for the chess duel.
 
 Dependencies:
@@ -588,7 +581,6 @@ Responsibilities:
 
 #### `ChessBoardCell`
 
-Role:
 Single reusable board-square prefab script.
 
 Expected child references:
@@ -605,7 +597,6 @@ Responsibilities:
 
 #### `MinimapController`
 
-Role:
 Creates and updates the tactical minimap camera.
 
 Responsibilities:
@@ -617,7 +608,6 @@ Responsibilities:
 
 #### `MinimapFog`
 
-Role:
 Implements simple fog-of-war discovery for the minimap.
 
 Responsibilities:
@@ -627,7 +617,6 @@ Responsibilities:
 
 #### `MainMenuManager`
 
-Role:
 Controls the front-end flow from main panel to level select.
 
 Responsibilities:
@@ -638,7 +627,6 @@ Responsibilities:
 
 #### `GameScreensUI`
 
-Role:
 Owns restart and return-to-menu actions from end screens.
 
 Responsibilities:
@@ -647,17 +635,17 @@ Responsibilities:
 - Reloads the current scene
 - Returns to `MainMenu`
 
-## Assets And Content Notes
+## Assets And Content
 
 ### Environment
 
-- `Assets/DungeonModularPack` provides the modular dungeon geometry and materials used by the maze builder.
-- Runtime maze geometry is assembled from assigned floor and wall prefabs rather than from one authored level mesh.
+- `Assets/DungeonModularPack` provides the modular dungeon geometry and materials used by the maze builder
+- Runtime maze geometry is assembled from assigned floor and wall prefabs rather than one authored level mesh
 
 ### Character Art
 
-- `Assets/Art/Mixamo` and `Assets/Art/Animations` contain player and ghost animation assets and animator controllers.
-- `PlayerAnimator.controller` and `CreepAnimator.controller` are the key animation state machines to verify if characters stop animating correctly.
+- `Assets/Art/Mixamo` and `Assets/Art/Animations` contain player and ghost animation assets and animator controllers
+- `PlayerAnimator.controller` and `CreepAnimator.controller` are the main animation state machines to verify if characters stop animating correctly
 
 ### Audio
 
@@ -686,12 +674,23 @@ For a gameplay scene to function correctly, it should include:
 - A UI canvas with `UIManager`, `HUDController`, `ChessBoardUI`, and end-screen buttons
 - A minimap camera using `MinimapController`
 
-## Known Architectural Notes
+## Production Notes
 
-- `GameStateManager` is marked `DontDestroyOnLoad`, so duplicate manager objects across scenes must be avoided.
-- `MainMenuManager` stores scene names as strings. If scene names change, those fields must be updated in the Inspector.
-- `PlayerSpawner` and `GhostSpawner` appear to be legacy or expansion scripts, while the active procedural flow is driven by `MazeGenerator`.
-- `ChessBoardUI` declares a `lastMoveColor` field that is not currently applied in the board refresh path.
+### Debug / QA Notes
+
+Current script-level debug shortcuts in `PlayerController`:
+
+- `P` forces the game into chess duel state
+- `L` removes one heart
+
+These are useful for testing, but should be removed or gated before a production release build.
+
+### Known Architectural Notes
+
+- `GameStateManager` is marked `DontDestroyOnLoad`, so duplicate manager objects across scenes must be avoided
+- `MainMenuManager` stores scene names as strings, so scene renames must be reflected in the Inspector
+- `PlayerSpawner` and `GhostSpawner` appear to be legacy or expansion scripts, while the active procedural flow is driven by `MazeGenerator`
+- `ChessBoardUI` declares a `lastMoveColor` field that is not currently applied in the board refresh path
 
 ## Credits
 
