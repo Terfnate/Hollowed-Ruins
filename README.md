@@ -2,6 +2,8 @@
 
 Haunted-maze survival game built in Unity 6 for `CMPS434 - Game Development Course Project`.
 
+![1778347989353](images/README/1778347989353.png)
+
 ## Player Manual
 
 ### Game Overview
@@ -9,6 +11,55 @@ Haunted-maze survival game built in Unity 6 for `CMPS434 - Game Development Cour
 You are trapped inside a haunted ruin maze. Explore the labyrinth, collect every broken key piece, reveal the exit portal, and escape before the ghost catches you.
 
 If the ghost reaches you, the game shifts into a 4x4 chess duel. Winning the duel buys time and forces the ghost away. Losing the duel costs a heart. Lose all hearts and the run ends.
+
+### Story
+
+#### The Legend
+
+Deep beneath the hills of Ashen Hollow lies a fortress no map remembers. It was built centuries ago by Lord Aldric Voss, a chess grandmaster, occultist, and tyrant who ruled through fear and ritual rather than open war.
+
+Aldric believed the mind was the truest prison. To prove it, he shaped his fortress into a shifting labyrinth, a place where corridors changed, hope decayed, and escape became a psychological game. He did not simply torment prisoners. He studied them. He sat them across a chessboard in the dark and offered one cruel bargain: win and live another day, lose and surrender something of yourself. A memory. A year. A piece of the soul.
+
+No one ever defeated him.
+
+When Aldric died, he did not leave his fortress behind. His madness fused with the stone, the shadows, and the labyrinth itself. What remains is the Warden, a restless presence bound to the ruins and still searching for new prisoners to test.
+
+#### You
+
+You are an urban explorer who followed the rumors into Ashen Hollow. Buried beneath local folklore was talk of a forgotten fortress, a shattered relic, and a treasure no one ever brought back out.
+
+You entered looking for history.
+
+Now you are looking for the exit.
+
+The walls shift behind you. Torchlight dies corridor by corridor. Somewhere in the dark, something old and patient is already tracking your footsteps.
+
+The Warden has found a new prisoner.
+
+#### The Chess Duels
+
+When the Warden catches you, he does not kill you. That was never his way.
+
+Instead, he drags you into the ritual that defined his rule. A board forms from shadow and memory, and the hunt becomes a duel of control. Every encounter is a fragment of the lessons he once forced on his captives: survive, protect, sacrifice, endure.
+
+Winning breaks his focus for a moment and gives you room to run.
+
+Losing costs part of what keeps you grounded in the world above. In gameplay, that cost is represented by your hearts. Three failures, and the ruins claim you like everyone before you.
+
+#### The Key And The Portal
+
+The relic hidden throughout the maze is the Warden's Seal, the only object capable of opening the passage out. Aldric shattered it himself, convinced that no prisoner could ever reassemble it while being hunted inside his labyrinth.
+
+Your escape depends on doing exactly that:
+
+- Find every broken key piece
+- Restore the seal
+- Open the portal
+- Run before the Warden reaches you again
+
+Some doors were built to keep things out.
+
+This one was built to keep you in.
 
 ### Unity Version
 
@@ -99,7 +150,6 @@ Each playable scene changes the pressure curve through:
 
 Current level configs:
 
-
 | Level    |  Maze | Keys | Patrol Speed | Chase Speed |
 | -------- | ----: | ---: | -----------: | ----------: |
 | Tutorial |   7x7 |    2 |            3 |           6 |
@@ -109,7 +159,9 @@ Current level configs:
 
 ## Project Overview
 
-### High Concept
+![1778348081069](images/README/1778348081069.png)
+
+## High Concept
 
 `Hollowed Ruins` combines third-person maze exploration with short-form tactical chess encounters. The main tension comes from alternating between spatial survival and turn-based problem solving.
 
