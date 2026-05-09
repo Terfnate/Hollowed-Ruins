@@ -2,8 +2,6 @@
 
 Haunted-maze survival game built in Unity 6 for `CMPS434 - Game Development Course Project`.
 
-![1778348788227](images/README/1778348788227.png)
-
 > A shifting fortress. A patient Warden. A broken seal that is the only way out.
 
 ## Contents
@@ -23,6 +21,7 @@ Haunted-maze survival game built in Unity 6 for `CMPS434 - Game Development Cour
 - [Credits](#credits)
 
 ## Game Snapshot
+
 
 | Item          | Details                                                                  |
 | ------------- | ------------------------------------------------------------------------ |
@@ -44,12 +43,15 @@ If the Warden reaches you, the game shifts into a 4x4 chess duel. Winning the du
 
 ### Controls
 
+
 | Input           | Action                                    |
 | --------------- | ----------------------------------------- |
 | `W / A / S / D` | Move                                      |
 | `Mouse`         | Look around                               |
 | `Left Shift`    | Sprint                                    |
 | `Left Click`    | Select and move chess pieces during duels |
+| `Esc`           | Pause / open in-game menu                 |
+| `R`             | Restart the current level                 |
 | `Q`             | Dash, final-heart mode only               |
 | `Space`         | Jump, final-heart mode only               |
 
@@ -63,12 +65,14 @@ If the Warden reaches you, the game shifts into a 4x4 chess duel. Winning the du
 
 ### Win / Lose Conditions
 
+
 | Result | Condition                                        |
 | ------ | ------------------------------------------------ |
 | `Win`  | Collect all key pieces and enter the exit portal |
 | `Lose` | Lose all 3 hearts by failing chess duels         |
 
 ### HUD
+
 
 | HUD Element          | Purpose                                                       |
 | -------------------- | ------------------------------------------------------------- |
@@ -168,6 +172,7 @@ When only one heart remains:
 
 Each playable scene changes the pressure curve through maze size, collectible count, and ghost speed.
 
+
 | Level    |  Maze | Keys | Patrol Speed | Chase Speed |
 | -------- | ----: | ---: | -----------: | ----------: |
 | Tutorial |   7x7 |    2 |            3 |           6 |
@@ -176,8 +181,6 @@ Each playable scene changes the pressure curve through maze size, collectible co
 | Hard     | 17x17 |    5 |            6 |          10 |
 
 ## Project Overview
-
-![1778348821344](images/README/1778348821344.png)
 
 ### High Concept
 
@@ -223,6 +226,7 @@ Configured build scenes from `ProjectSettings/EditorBuildSettings.asset`:
 
 ### High-Value Folders
 
+
 | Path                                          | Purpose                                                       |
 | --------------------------------------------- | ------------------------------------------------------------- |
 | `Hollowed Ruins/Assets/_Scenes`               | Main menu and gameplay scenes                                 |
@@ -235,6 +239,7 @@ Configured build scenes from `ProjectSettings/EditorBuildSettings.asset`:
 | `docs`                                        | Design and script reference documents                         |
 
 ### Runtime Code Layout
+
 
 | Folder           | Responsibility                                        |
 | ---------------- | ----------------------------------------------------- |
@@ -698,10 +703,10 @@ Course: `CMPS434`
 
 Team:
 
-- Majid Marzouq
-- Oluwadamilola Olajide
-- Abdullah Hamed
-- Mohamad Allouh
+- Majid Marzouq | Gameplay Programmer
+- Oluwadamilola Olajide | Level Designer
+- Abdullah Hamed | UI Artist
+- Mohamad Allouh | Narrative Designer
 
 Supporting docs:
 

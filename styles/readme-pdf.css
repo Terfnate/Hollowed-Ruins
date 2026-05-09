@@ -1,0 +1,206 @@
+@page {
+  size: A4;
+  margin: 0;
+}
+
+:root {
+  --paper: #fffdfa;
+  --ink: #231b17;
+  --muted: #6a5c51;
+  --line: #d8c4b3;
+  --panel: #f6efe8;
+  --panel-strong: #efe3d7;
+  --accent: #9a5a2a;
+  --accent-soft: #c68a57;
+}
+
+html,
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: 12px !important;
+  line-height: 1.55 !important;
+}
+
+body {
+  padding: 0 8mm !important;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--ink);
+  page-break-after: avoid;
+}
+
+h1 {
+  font-size: 28px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 8px;
+  margin-bottom: 6px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid var(--accent);
+}
+
+h2 {
+  font-size: 19px;
+  margin-top: 28px;
+  margin-bottom: 10px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--line);
+}
+
+h3 {
+  font-size: 15px;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  color: var(--accent);
+}
+
+h4 {
+  font-size: 13px;
+  margin-top: 16px;
+  margin-bottom: 6px;
+}
+
+p,
+li,
+td,
+th,
+blockquote {
+  orphans: 3;
+  widows: 3;
+}
+
+p {
+  margin: 0 0 10px;
+}
+
+blockquote {
+  background: linear-gradient(90deg, #f8f1e9 0%, #fffdfa 100%);
+  border-left: 4px solid var(--accent);
+  color: #4c3f36;
+  padding: 10px 14px;
+  margin: 14px 0 18px;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  margin: 12px auto 18px;
+  max-width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 24px rgba(42, 28, 18, 0.12);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0 18px;
+  background: white;
+  page-break-inside: avoid;
+}
+
+thead tr th {
+  background: var(--panel-strong);
+  border-bottom: 1px solid var(--line) !important;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+  padding: 8px 10px !important;
+  border: 1px solid var(--line);
+}
+
+table > tbody > tr + tr > td {
+  border-top: 1px solid var(--line) !important;
+}
+
+tr:nth-child(even) td {
+  background: #fcf8f4;
+}
+
+code {
+  font-family: Consolas, "Courier New", monospace;
+  background: #f2e7db;
+  color: #6f3211 !important;
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 0.95em !important;
+}
+
+pre {
+  background: #fbf7f2 !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 8px !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+pre code,
+pre.hljs code > div {
+  color: #2f251f !important;
+}
+
+ul,
+ol {
+  margin-top: 6px;
+  margin-bottom: 14px;
+}
+
+li {
+  margin-bottom: 4px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 18px 0;
+}
+
+h1 + p {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+h1 + p + p img,
+h1 + img {
+  margin-top: 16px;
+}
+
+blockquote p {
+  margin: 0;
+  font-style: italic;
+}
+
+h2#contents + ul {
+  columns: 2;
+  column-gap: 26px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px 18px;
+}
+
+h2#game-snapshot + table,
+h3#controls + table,
+h3#win--lose-conditions + table,
+h3#hud + table,
+h2#level-profiles + p + table,
+h3#high-value-folders + table,
+h3#runtime-code-layout + table {
+  box-shadow: 0 8px 18px rgba(42, 28, 18, 0.06);
+}
+
+strong {
+  color: #3b271c;
+}

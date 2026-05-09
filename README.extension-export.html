@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hollowed Ruins README</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <style>/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+html,footer,header{
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+/*
+ * Custom MD PDF CSS
+ */
+html,footer,header{
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+
+ }
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+:root {
+  --paper: #fffdfa;
+  --ink: #231b17;
+  --muted: #6a5c51;
+  --line: #d8c4b3;
+  --panel: #f6efe8;
+  --panel-strong: #efe3d7;
+  --accent: #9a5a2a;
+  --accent-soft: #c68a57;
+}
+
+html,
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: 12px !important;
+  line-height: 1.55 !important;
+}
+
+body {
+  padding: 0 8mm !important;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--ink);
+  page-break-after: avoid;
+}
+
+h1 {
+  font-size: 28px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 8px;
+  margin-bottom: 6px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid var(--accent);
+}
+
+h2 {
+  font-size: 19px;
+  margin-top: 28px;
+  margin-bottom: 10px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--line);
+}
+
+h3 {
+  font-size: 15px;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  color: var(--accent);
+}
+
+h4 {
+  font-size: 13px;
+  margin-top: 16px;
+  margin-bottom: 6px;
+}
+
+p,
+li,
+td,
+th,
+blockquote {
+  orphans: 3;
+  widows: 3;
+}
+
+p {
+  margin: 0 0 10px;
+}
+
+blockquote {
+  background: linear-gradient(90deg, #f8f1e9 0%, #fffdfa 100%);
+  border-left: 4px solid var(--accent);
+  color: #4c3f36;
+  padding: 10px 14px;
+  margin: 14px 0 18px;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  margin: 12px auto 18px;
+  max-width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 24px rgba(42, 28, 18, 0.12);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0 18px;
+  background: white;
+  page-break-inside: avoid;
+}
+
+thead tr th {
+  background: var(--panel-strong);
+  border-bottom: 1px solid var(--line) !important;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+  padding: 8px 10px !important;
+  border: 1px solid var(--line);
+}
+
+table > tbody > tr + tr > td {
+  border-top: 1px solid var(--line) !important;
+}
+
+tr:nth-child(even) td {
+  background: #fcf8f4;
+}
+
+code {
+  font-family: Consolas, "Courier New", monospace;
+  background: #f2e7db;
+  color: #6f3211 !important;
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 0.95em !important;
+}
+
+pre {
+  background: #fbf7f2 !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 8px !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+pre code,
+pre.hljs code > div {
+  color: #2f251f !important;
+}
+
+ul,
+ol {
+  margin-top: 6px;
+  margin-bottom: 14px;
+}
+
+li {
+  margin-bottom: 4px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 18px 0;
+}
+
+h1 + p {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+h1 + p + p img,
+h1 + img {
+  margin-top: 16px;
+}
+
+blockquote p {
+  margin: 0;
+  font-style: italic;
+}
+
+h2#contents + ul {
+  columns: 2;
+  column-gap: 26px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px 18px;
+}
+
+h2#game-snapshot + table,
+h3#controls + table,
+h3#win--lose-conditions + table,
+h3#hud + table,
+h2#level-profiles + p + table,
+h3#high-value-folders + table,
+h3#runtime-code-layout + table {
+  box-shadow: 0 8px 18px rgba(42, 28, 18, 0.06);
+}
+
+strong {
+  color: #3b271c;
+}
+</style>
+</head>
+
+<body>
+    <h1 id="hollowed-ruins">HOLLOWED RUINS</h1>
+<p>Haunted-maze survival game built in Unity 6 for <code>CMPS434 - Game Development Course Project</code>.</p>
+<blockquote>
+<p>A shifting fortress. A patient Warden. A broken seal that is the only way out.</p>
+</blockquote>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#game-snapshot">Game Snapshot</a></li>
+<li><a href="#player-manual">Player Manual</a></li>
+<li><a href="#story">Story</a></li>
+<li><a href="#gameplay-overview">Gameplay Overview</a></li>
+<li><a href="#level-profiles">Level Profiles</a></li>
+<li><a href="#project-overview">Project Overview</a></li>
+<li><a href="#getting-started">Getting Started</a></li>
+<li><a href="#project-structure">Project Structure</a></li>
+<li><a href="#gameplay-systems-reference">Gameplay Systems Reference</a></li>
+<li><a href="#assets-and-content">Assets And Content</a></li>
+<li><a href="#scene-setup-expectations">Scene Setup Expectations</a></li>
+<li><a href="#production-notes">Production Notes</a></li>
+<li><a href="#credits">Credits</a></li>
+</ul>
+<h2 id="game-snapshot">Game Snapshot</h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Genre</td>
+<td>Third-person horror exploration / tactical puzzle</td>
+</tr>
+<tr>
+<td>Core Hook</td>
+<td>Escape a procedural maze while surviving ghost-triggered 4x4 chess duels</td>
+</tr>
+<tr>
+<td>Engine</td>
+<td><code>Unity 6000.3.9f1</code></td>
+</tr>
+<tr>
+<td>Platform</td>
+<td>Windows 10/11</td>
+</tr>
+<tr>
+<td>Input</td>
+<td>Keyboard + mouse, with Input System gamepad bindings present</td>
+</tr>
+<tr>
+<td>Primary Goal</td>
+<td>Collect all key fragments, reveal the portal, and escape</td>
+</tr>
+<tr>
+<td>Failure State</td>
+<td>Lose all 3 hearts by failing chess duels</td>
+</tr>
+</tbody>
+</table>
+<h2 id="player-manual">Player Manual</h2>
+<h3 id="game-premise">Game Premise</h3>
+<p>You are trapped inside a haunted ruin maze. Explore the labyrinth, collect every broken key piece, reveal the exit portal, and escape before the Warden catches you.</p>
+<p>If the Warden reaches you, the game shifts into a 4x4 chess duel. Winning the duel buys time and forces him away. Losing the duel costs a heart. Lose all hearts and the run ends.</p>
+<h3 id="controls">Controls</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>W / A / S / D</code></td>
+<td>Move</td>
+</tr>
+<tr>
+<td><code>Mouse</code></td>
+<td>Look around</td>
+</tr>
+<tr>
+<td><code>Left Shift</code></td>
+<td>Sprint</td>
+</tr>
+<tr>
+<td><code>Left Click</code></td>
+<td>Select and move chess pieces during duels</td>
+</tr>
+<tr>
+<td><code>Esc</code></td>
+<td>Pause / open in-game menu</td>
+</tr>
+<tr>
+<td><code>R</code></td>
+<td>Restart the current level</td>
+</tr>
+<tr>
+<td><code>Q</code></td>
+<td>Dash, final-heart mode only</td>
+</tr>
+<tr>
+<td><code>Space</code></td>
+<td>Jump, final-heart mode only</td>
+</tr>
+</tbody>
+</table>
+<h3 id="objective-flow">Objective Flow</h3>
+<ol>
+<li>Search the maze for key fragments.</li>
+<li>Avoid or outlast the Warden.</li>
+<li>Win chess duels when caught.</li>
+<li>Assemble the full seal.</li>
+<li>Reach the portal and escape.</li>
+</ol>
+<h3 id="win--lose-conditions">Win / Lose Conditions</h3>
+<table>
+<thead>
+<tr>
+<th>Result</th>
+<th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Win</code></td>
+<td>Collect all key pieces and enter the exit portal</td>
+</tr>
+<tr>
+<td><code>Lose</code></td>
+<td>Lose all 3 hearts by failing chess duels</td>
+</tr>
+</tbody>
+</table>
+<h3 id="hud">HUD</h3>
+<table>
+<thead>
+<tr>
+<th>HUD Element</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Hearts</code></td>
+<td>Top-left life display</td>
+</tr>
+<tr>
+<td><code>Key Counter</code></td>
+<td>Shows progress such as<code>2 / 3</code></td>
+</tr>
+<tr>
+<td><code>Portal Prompt</code></td>
+<td>Changes to<code>Find the portal!</code> after the final key is collected</td>
+</tr>
+<tr>
+<td><code>Ghost Warning</code></td>
+<td>Pulses when the Warden is actively chasing</td>
+</tr>
+<tr>
+<td><code>Minimap</code></td>
+<td>Top-right tactical view with a cyan player marker</td>
+</tr>
+<tr>
+<td><code>Last Heart Overlay</code></td>
+<td>Red heartbeat screen effect on the final life</td>
+</tr>
+<tr>
+<td><code>Dash Indicator</code></td>
+<td>Displays emergency dash cooldown</td>
+</tr>
+</tbody>
+</table>
+<h2 id="story">Story</h2>
+<h3 id="the-legend">The Legend</h3>
+<p>Deep beneath the hills of Ashen Hollow lies a fortress no map remembers. It was built centuries ago by Lord Aldric Voss, a chess grandmaster, occultist, and tyrant who ruled through fear and ritual rather than open war.</p>
+<p>Aldric believed the mind was the truest prison. To prove it, he shaped his fortress into a shifting labyrinth, a place where corridors changed, hope decayed, and escape became a psychological game. He did not simply torment prisoners. He studied them. He sat them across a chessboard in the dark and offered one cruel bargain: win and live another day, lose and surrender something of yourself. A memory. A year. A piece of the soul.</p>
+<p>No one ever defeated him.</p>
+<p>When Aldric died, he did not leave his fortress behind. His madness fused with the stone, the shadows, and the labyrinth itself. What remains is the Warden, a restless presence bound to the ruins and still searching for new prisoners to test.</p>
+<h3 id="you">You</h3>
+<p>You are an urban explorer who followed the rumors into Ashen Hollow. Buried beneath local folklore was talk of a forgotten fortress, a shattered relic, and a treasure no one ever brought back out.</p>
+<p>You entered looking for history.</p>
+<p>Now you are looking for the exit.</p>
+<p>The walls shift behind you. Torchlight dies corridor by corridor. Somewhere in the dark, something old and patient is already tracking your footsteps.</p>
+<p>The Warden has found a new prisoner.</p>
+<h3 id="the-chess-duels">The Chess Duels</h3>
+<p>When the Warden catches you, he does not kill you. That was never his way.</p>
+<p>Instead, he drags you into the ritual that defined his rule. A board forms from shadow and memory, and the hunt becomes a duel of control. Every encounter is a fragment of the lessons he once forced on his captives: survive, protect, sacrifice, endure.</p>
+<p>Winning breaks his focus for a moment and gives you room to run.</p>
+<p>Losing costs part of what keeps you grounded in the world above. In gameplay terms, that loss becomes one heart. Three failures, and the ruins claim you like everyone before you.</p>
+<h3 id="the-key-and-the-portal">The Key And The Portal</h3>
+<p>The relic hidden throughout the maze is the Warden's Seal, the only object capable of opening the passage out. Aldric shattered it himself, convinced that no prisoner could ever reassemble it while being hunted inside his labyrinth.</p>
+<p>Your escape depends on doing exactly that:</p>
+<ul>
+<li>Find every broken key piece</li>
+<li>Restore the seal</li>
+<li>Open the portal</li>
+<li>Run before the Warden reaches you again</li>
+</ul>
+<p>Some doors were built to keep things out.</p>
+<p>This one was built to keep you in.</p>
+<h2 id="gameplay-overview">Gameplay Overview</h2>
+<h3 id="the-warden">The Warden</h3>
+<ul>
+<li>Patrols the maze using Unity NavMesh</li>
+<li>Detects the player through line of sight</li>
+<li>Investigates sound events emitted by movement and pickups</li>
+<li>Responds more aggressively to sprinting than walking</li>
+<li>Is strongly drawn to key pickups because they emit a large noise pulse</li>
+</ul>
+<h3 id="chess-duel-rules">Chess Duel Rules</h3>
+<p>When the Warden catches the player, exploration pauses and a chess challenge begins on a 4x4 board.</p>
+<p>Possible duel objectives:</p>
+<ul>
+<li>Survive for a number of turns</li>
+<li>Protect a specified piece for a number of turns</li>
+<li>Avoid losing any white piece for a number of turns</li>
+<li>Capture a specified enemy piece before turns run out</li>
+</ul>
+<p>Possible duel outcomes:</p>
+<ul>
+<li><code>Win</code>: the Warden screams, vanishes temporarily, and respawns elsewhere in the maze</li>
+<li><code>Lose</code>: the player loses 1 heart, the Warden is briefly stunned, and exploration resumes</li>
+</ul>
+<h3 id="final-heart-mode">Final Heart Mode</h3>
+<p>When only one heart remains:</p>
+<ul>
+<li><code>Q</code> activates a forward dash with a 30-second cooldown</li>
+<li><code>Space</code> enables jumping</li>
+<li>Sprinting gains a speed multiplier</li>
+<li>A heartbeat overlay appears across the HUD</li>
+</ul>
+<h2 id="level-profiles">Level Profiles</h2>
+<p>Each playable scene changes the pressure curve through maze size, collectible count, and ghost speed.</p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th style="text-align:right">Maze</th>
+<th style="text-align:right">Keys</th>
+<th style="text-align:right">Patrol Speed</th>
+<th style="text-align:right">Chase Speed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tutorial</td>
+<td style="text-align:right">7x7</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">6</td>
+</tr>
+<tr>
+<td>Easy</td>
+<td style="text-align:right">12x12</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">8</td>
+</tr>
+<tr>
+<td>Medium</td>
+<td style="text-align:right">15x15</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">9</td>
+</tr>
+<tr>
+<td>Hard</td>
+<td style="text-align:right">17x17</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">10</td>
+</tr>
+</tbody>
+</table>
+<h2 id="project-overview">Project Overview</h2>
+<h3 id="high-concept">High Concept</h3>
+<p><code>Hollowed Ruins</code> combines third-person maze exploration with short-form tactical chess encounters. The main tension comes from alternating between spatial survival and turn-based problem solving.</p>
+<h3 id="core-loop">Core Loop</h3>
+<ol>
+<li>Spawn into a procedurally generated maze.</li>
+<li>Explore, collect key pieces, and manage ghost pressure.</li>
+<li>Enter a chess duel if the Warden catches the player.</li>
+<li>Resume exploration after duel resolution.</li>
+<li>Escape through the revealed portal.</li>
+</ol>
+<h3 id="build-scenes">Build Scenes</h3>
+<p>Configured build scenes from <code>ProjectSettings/EditorBuildSettings.asset</code>:</p>
+<ul>
+<li><code>Assets/_Scenes/MainMenu.unity</code></li>
+<li><code>Assets/_Scenes/LevelTutorial.unity</code></li>
+<li><code>Assets/_Scenes/LevelEasy.unity</code></li>
+<li><code>Assets/_Scenes/LevelMedium.unity</code></li>
+<li><code>Assets/_Scenes/LevelHard.unity</code></li>
+</ul>
+<h2 id="getting-started">Getting Started</h2>
+<h3 id="opening-the-project">Opening The Project</h3>
+<ol>
+<li>Open Unity Hub.</li>
+<li>Add the folder <code>Hollowed Ruins</code>.</li>
+<li>Open the project with <code>Unity 6000.3.9f1</code>.</li>
+<li>Load <code>Assets/_Scenes/MainMenu.unity</code> to start from the intended front end.</li>
+</ol>
+<h3 id="primary-packages">Primary Packages</h3>
+<ul>
+<li><code>com.unity.inputsystem</code></li>
+<li><code>com.unity.cinemachine</code></li>
+<li><code>com.unity.ai.navigation</code></li>
+<li><code>com.unity.render-pipelines.universal</code></li>
+<li><code>com.unity.ugui</code></li>
+<li><code>com.unity.textmeshpro</code></li>
+</ul>
+<h2 id="project-structure">Project Structure</h2>
+<h3 id="high-value-folders">High-Value Folders</h3>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Hollowed Ruins/Assets/_Scenes</code></td>
+<td>Main menu and gameplay scenes</td>
+</tr>
+<tr>
+<td><code>Hollowed Ruins/Assets/_Scenes/Levels Config</code></td>
+<td>Per-difficulty<code>LevelConfig</code> assets</td>
+</tr>
+<tr>
+<td><code>Hollowed Ruins/Assets/Scripts</code></td>
+<td>Gameplay code</td>
+</tr>
+<tr>
+<td><code>Hollowed Ruins/Assets/Audio</code></td>
+<td>Ambient, music, and ghost SFX</td>
+</tr>
+<tr>
+<td><code>Hollowed Ruins/Assets/Art</code></td>
+<td>Character art, materials, textures, and animation controllers</td>
+</tr>
+<tr>
+<td><code>Hollowed Ruins/Assets/UI</code></td>
+<td>HUD sprites and fonts</td>
+</tr>
+<tr>
+<td><code>Hollowed Ruins/Assets/DungeonModularPack</code></td>
+<td>Modular environment kit used by the maze builder</td>
+</tr>
+<tr>
+<td><code>docs</code></td>
+<td>Design and script reference documents</td>
+</tr>
+</tbody>
+</table>
+<h3 id="runtime-code-layout">Runtime Code Layout</h3>
+<table>
+<thead>
+<tr>
+<th>Folder</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Scripts/Core</code></td>
+<td>Game state, health, noise, level tuning</td>
+</tr>
+<tr>
+<td><code>Scripts/Player</code></td>
+<td>Player movement and spawn support</td>
+</tr>
+<tr>
+<td><code>Scripts/Maze</code></td>
+<td>Procedural generation, objective placement, exit flow</td>
+</tr>
+<tr>
+<td><code>Scripts/Ghost</code></td>
+<td>AI, animation bridge, spawn support</td>
+</tr>
+<tr>
+<td><code>Scripts/Chess</code></td>
+<td>Duel rules, board model, scenarios, evaluator, AI</td>
+</tr>
+<tr>
+<td><code>Scripts/UI</code></td>
+<td>HUD, minimap, menus, duel board, end screens</td>
+</tr>
+</tbody>
+</table>
+<h2 id="gameplay-systems-reference">Gameplay Systems Reference</h2>
+<p>This section is written as a production handoff: what each system owns, what it depends on, and why it matters to the game.</p>
+<h3 id="1-state-management">1. State Management</h3>
+<h4 id="gamestatemanager"><code>GameStateManager</code></h4>
+<p>Central authority for game flow. All major systems query or react to <code>Exploring</code>, <code>ChessDuel</code>, <code>GameOver</code>, and <code>Win</code>.</p>
+<p>Key responsibilities:</p>
+<ul>
+<li>Stores the active <code>LevelConfig</code></li>
+<li>Broadcasts state changes through <code>OnStateChanged</code></li>
+<li>Freezes and resumes world time with <code>Time.timeScale</code></li>
+<li>Persists across scene reloads with <code>DontDestroyOnLoad</code></li>
+</ul>
+<h4 id="healthsystem"><code>HealthSystem</code></h4>
+<p>Owns the player's heart economy.</p>
+<p>Key responsibilities:</p>
+<ul>
+<li>Initializes and resets hearts</li>
+<li>Emits <code>OnHeartsChanged</code></li>
+<li>Triggers <code>GameOver</code> when hearts reach zero</li>
+</ul>
+<h4 id="noisesystem"><code>NoiseSystem</code></h4>
+<p>Simple event bus for sound-driven gameplay.</p>
+<p>Key responsibilities:</p>
+<ul>
+<li>Emits noise events with <code>position</code> and <code>radius</code></li>
+<li>Lets the player and pickup systems influence ghost behavior without hard references</li>
+</ul>
+<h4 id="levelconfig"><code>LevelConfig</code></h4>
+<p>ScriptableObject that defines difficulty tuning per level.</p>
+<p>Fields:</p>
+<ul>
+<li><code>mazeWidth</code></li>
+<li><code>mazeHeight</code></li>
+<li><code>keyPieceCount</code></li>
+<li><code>ghostPatrolSpeed</code></li>
+<li><code>ghostChaseSpeed</code></li>
+</ul>
+<h3 id="2-player-layer">2. Player Layer</h3>
+<h4 id="playercontroller"><code>PlayerController</code></h4>
+<p>Primary exploration controller.</p>
+<p>Required components:</p>
+<ul>
+<li><code>CharacterController</code></li>
+<li><code>PlayerInput</code></li>
+</ul>
+<p>Serialized dependencies:</p>
+<ul>
+<li><code>cameraTarget</code></li>
+<li><code>animator</code></li>
+<li><code>footstepSource</code></li>
+</ul>
+<p>Major features:</p>
+<ul>
+<li>Walk and sprint locomotion</li>
+<li>Mouse-look orbit target control</li>
+<li>Gravity handling through <code>CharacterController</code></li>
+<li>Noise emission tied to movement state</li>
+<li>Footstep loop playback</li>
+<li>Last-heart sprint boost</li>
+<li>Last-heart dash and jump</li>
+</ul>
+<p>Notable implementation details:</p>
+<ul>
+<li><code>DashCooldownRemaining</code> and <code>DashReady</code> expose player status cleanly to HUD systems</li>
+<li><code>EmitLoudNoise(float radius)</code> provides an explicit hook for future interactables</li>
+<li>Debug keys currently exist in <code>Update()</code>: <code>P</code> forces a chess duel and <code>L</code> removes a heart</li>
+</ul>
+<h4 id="playerspawner"><code>PlayerSpawner</code></h4>
+<p>Legacy utility for spawning a prefab at a <code>PlayerSpawn</code> marker.</p>
+<h3 id="3-maze-generation-and-objective-layer">3. Maze Generation And Objective Layer</h3>
+<h4 id="mazegenerator"><code>MazeGenerator</code></h4>
+<p>Builds the maze at runtime and places mission-critical actors and objectives.</p>
+<p>Required dependencies:</p>
+<ul>
+<li><code>NavMeshSurface</code> on the same GameObject for runtime bake</li>
+<li>Assigned <code>floorPrefab</code>, <code>wallPrefab</code>, <code>keyPiecePrefab</code>, and <code>exitPrefab</code></li>
+<li>References to the player transform and ghost actor</li>
+</ul>
+<p>Major features:</p>
+<ul>
+<li>Reads width, height, and key count from <code>GameStateManager.levelConfig</code></li>
+<li>Uses recursive backtracking to carve a solvable maze</li>
+<li>Forces a central 2x2 hall for reliable spawn space</li>
+<li>Adds extra gaps to create loops and reduce single-solution predictability</li>
+<li>Builds floor, ceiling, and wall geometry</li>
+<li>Bakes a runtime NavMesh for ghost navigation</li>
+<li>Places the player, ghost, exit, and key pieces</li>
+<li>Notifies <code>MinimapFog</code> once the layout is ready</li>
+</ul>
+<h4 id="piececollectionsystem"><code>PieceCollectionSystem</code></h4>
+<p>Tracks objective progress.</p>
+<p>Responsibilities:</p>
+<ul>
+<li>Counts collected key pieces</li>
+<li>Broadcasts progress to UI</li>
+<li>Fires completion events</li>
+<li>Reveals the exit once all keys are found</li>
+</ul>
+<h4 id="keypiece"><code>KeyPiece</code></h4>
+<p>Collectible actor attached to the key prefab.</p>
+<p>Behavior:</p>
+<ul>
+<li>Applies bobbing and spinning for visual readability</li>
+<li>Detects player trigger entry</li>
+<li>Emits a very large noise pulse on pickup</li>
+<li>Reports progress to <code>PieceCollectionSystem</code></li>
+<li>Destroys itself after collection</li>
+</ul>
+<h4 id="exittrigger"><code>ExitTrigger</code></h4>
+<p>Win-condition gate attached to the exit portal.</p>
+<p>Behavior:</p>
+<ul>
+<li>Verifies all key pieces are collected</li>
+<li>Pushes game state to <code>Win</code></li>
+</ul>
+<h3 id="4-ghost-ai-layer">4. Ghost AI Layer</h3>
+<h4 id="ghostai"><code>GhostAI</code></h4>
+<p>Primary enemy behavior controller.</p>
+<p>Required components:</p>
+<ul>
+<li><code>NavMeshAgent</code></li>
+</ul>
+<p>Serialized dependencies:</p>
+<ul>
+<li><code>sightBlockMask</code></li>
+<li><code>audioSource</code></li>
+<li><code>ghostAlertClip</code></li>
+<li><code>ghostRoarClip</code></li>
+</ul>
+<p>States:</p>
+<ul>
+<li><code>Patrol</code></li>
+<li><code>Chase</code></li>
+<li><code>Stun</code></li>
+</ul>
+<p>Major features:</p>
+<ul>
+<li>Reads movement tuning from <code>LevelConfig</code></li>
+<li>Waits until runtime NavMesh is ready before activating navigation</li>
+<li>Uses forward-angle and raycast checks for visual detection</li>
+<li>Reacts to <code>NoiseSystem</code> events for investigation behavior</li>
+<li>Starts chess duels on collision with the player</li>
+<li>Supports <code>Stun()</code> and <code>Vanish(float duration)</code> as separate recovery outcomes</li>
+</ul>
+<p>Important design note:</p>
+<ul>
+<li>Losing a duel stuns the ghost in place</li>
+<li>Winning a duel makes the ghost vanish, relocate, and then resume patrol</li>
+</ul>
+<h4 id="ghostanimator"><code>GhostAnimator</code></h4>
+<p>Bridges AI state into animation parameters.</p>
+<p>Responsibilities:</p>
+<ul>
+<li>Pushes <code>IsMoving</code></li>
+<li>Pushes <code>IsChasing</code></li>
+<li>Pushes <code>IsStunned</code></li>
+<li>Pushes <code>Speed</code></li>
+<li>Triggers <code>Scream</code></li>
+</ul>
+<h4 id="ghostspawner"><code>GhostSpawner</code></h4>
+<p>Additional spawn utility for <code>GhostSpawn</code> markers.</p>
+<h3 id="5-chess-duel-layer">5. Chess Duel Layer</h3>
+<p>This subsystem is the identity feature of the project. It is cleanly split between orchestration, board rules, scenario data, objective evaluation, and AI decision-making.</p>
+<h4 id="chessduelmanager"><code>ChessDuelManager</code></h4>
+<p>Top-level duel orchestrator.</p>
+<p>Responsibilities:</p>
+<ul>
+<li>Starts duels when the game state changes to <code>ChessDuel</code></li>
+<li>Loads a random scenario</li>
+<li>Builds the board model</li>
+<li>Handles player clicks and move submission</li>
+<li>Delays and executes ghost turns</li>
+<li>Evaluates win/loss outcome</li>
+<li>Plays duel music</li>
+<li>Resolves post-duel recovery back into exploration</li>
+</ul>
+<p>Important runtime behavior:</p>
+<ul>
+<li>Uses <code>WaitForSecondsRealtime</code> so chess flow still runs while world time is paused</li>
+<li>Raises UI-facing events such as <code>OnDuelStarted</code>, <code>OnPlayerMoved</code>, and <code>OnTurnsRemainingChanged</code></li>
+</ul>
+<h4 id="chessboard"><code>ChessBoard</code></h4>
+<p>Pure board-state model.</p>
+<p>Responsibilities:</p>
+<ul>
+<li>Loads a scenario into a 4x4 grid</li>
+<li>Stores live piece positions</li>
+<li>Generates legal moves</li>
+<li>Executes captures</li>
+<li>Supports cloning for AI simulation</li>
+</ul>
+<p>Supported piece logic:</p>
+<ul>
+<li>King</li>
+<li>Queen</li>
+<li>Rook</li>
+<li>Bishop</li>
+<li>Knight</li>
+<li>Pawn</li>
+</ul>
+<h4 id="chessdata"><code>ChessData</code></h4>
+<p>Shared enums and serializable data containers for the duel feature.</p>
+<p>Includes:</p>
+<ul>
+<li><code>PieceType</code></li>
+<li><code>PieceColor</code></li>
+<li><code>ObjectiveType</code></li>
+<li><code>ChessPiece</code></li>
+<li><code>PiecePlacement</code></li>
+<li><code>ChessObjective</code></li>
+</ul>
+<h4 id="chessscenario"><code>ChessScenario</code></h4>
+<p>Designer-authored ScriptableObject used to build an encounter.</p>
+<p>Contains:</p>
+<ul>
+<li>Initial piece placements</li>
+<li>Objective metadata</li>
+<li>Designer-facing description text for UI</li>
+</ul>
+<h4 id="chessobjectiveevaluator"><code>ChessObjectiveEvaluator</code></h4>
+<p>Evaluates duel success and failure conditions.</p>
+<p>Supported objective types:</p>
+<ul>
+<li><code>DontLosePiece</code></li>
+<li><code>ProtectPiece</code></li>
+<li><code>CaptureTarget</code></li>
+<li><code>SurviveNTurns</code></li>
+</ul>
+<h4 id="ghostchessai"><code>GhostChessAI</code></h4>
+<p>Turn-selection logic for the ghost.</p>
+<p>Implementation:</p>
+<ul>
+<li>Scores moves using a lightweight minimax search</li>
+<li>Evaluates board advantage by material value</li>
+<li>Plays as black</li>
+</ul>
+<h3 id="6-ui-and-front-end-layer">6. UI And Front-End Layer</h3>
+<h4 id="uimanager"><code>UIManager</code></h4>
+<p>Activates the correct screen for each game state.</p>
+<p>Panels:</p>
+<ul>
+<li>HUD</li>
+<li>Chess Duel</li>
+<li>Game Over</li>
+<li>Win</li>
+</ul>
+<h4 id="hudcontroller"><code>HUDController</code></h4>
+<p>Owns the live exploration HUD.</p>
+<p>Dependencies:</p>
+<ul>
+<li>Heart icon images and sprites</li>
+<li>Piece counter <code>TextMeshProUGUI</code></li>
+<li>Ghost warning icon</li>
+<li>Last-heart overlay image</li>
+<li>Dash indicator image and text</li>
+</ul>
+<p>Responsibilities:</p>
+<ul>
+<li>Reflect heart changes</li>
+<li>Reflect key progress</li>
+<li>Switch prompt to <code>Find the portal!</code></li>
+<li>Pulse ghost-warning alpha during chase</li>
+<li>Animate the heartbeat overlay</li>
+<li>Show dash readiness and cooldown</li>
+</ul>
+<h4 id="chessboardui"><code>ChessBoardUI</code></h4>
+<p>Visual front end for the chess duel.</p>
+<p>Dependencies:</p>
+<ul>
+<li><code>GridLayoutGroup</code></li>
+<li>Cell prefab using <code>ChessBoardCell</code></li>
+<li>White and black piece sprite sets</li>
+<li>Objective and turns labels</li>
+</ul>
+<p>Responsibilities:</p>
+<ul>
+<li>Builds the 4x4 board dynamically</li>
+<li>Renders pieces from the pure board model</li>
+<li>Highlights selection and legal moves</li>
+<li>Sends player clicks to <code>ChessDuelManager</code></li>
+</ul>
+<h4 id="chessboardcell"><code>ChessBoardCell</code></h4>
+<p>Single reusable board-square prefab script.</p>
+<p>Expected child references:</p>
+<ul>
+<li>background image</li>
+<li>highlight image</li>
+<li>piece image</li>
+</ul>
+<p>Responsibilities:</p>
+<ul>
+<li>Initializes board coordinates</li>
+<li>Displays piece sprite and tint</li>
+<li>Forwards button clicks back to <code>ChessBoardUI</code></li>
+</ul>
+<h4 id="minimapcontroller"><code>MinimapController</code></h4>
+<p>Creates and updates the tactical minimap camera.</p>
+<p>Responsibilities:</p>
+<ul>
+<li>Configures an orthographic top-down camera</li>
+<li>Positions it over the maze center</li>
+<li>Spawns a cyan cylinder marker for the player</li>
+<li>Hides minimap-only layers from the main camera</li>
+</ul>
+<h4 id="minimapfog"><code>MinimapFog</code></h4>
+<p>Implements simple fog-of-war discovery for the minimap.</p>
+<p>Responsibilities:</p>
+<ul>
+<li>Builds per-cell fog quads after the maze is generated</li>
+<li>Reveals the current cell and adjacent cells as the player moves</li>
+</ul>
+<h4 id="mainmenumanager"><code>MainMenuManager</code></h4>
+<p>Controls the front-end flow from main panel to level select.</p>
+<p>Responsibilities:</p>
+<ul>
+<li>Shows and hides menu panels</li>
+<li>Loads the tutorial, easy, medium, and hard scenes</li>
+<li>Quits the game or stops play mode in the editor</li>
+</ul>
+<h4 id="gamescreensui"><code>GameScreensUI</code></h4>
+<p>Owns restart and return-to-menu actions from end screens.</p>
+<p>Responsibilities:</p>
+<ul>
+<li>Resets game state, hearts, and key progress</li>
+<li>Reloads the current scene</li>
+<li>Returns to <code>MainMenu</code></li>
+</ul>
+<h2 id="assets-and-content">Assets And Content</h2>
+<h3 id="environment">Environment</h3>
+<ul>
+<li><code>Assets/DungeonModularPack</code> provides the modular dungeon geometry and materials used by the maze builder</li>
+<li>Runtime maze geometry is assembled from assigned floor and wall prefabs rather than one authored level mesh</li>
+</ul>
+<h3 id="character-art">Character Art</h3>
+<ul>
+<li><code>Assets/Art/Mixamo</code> and <code>Assets/Art/Animations</code> contain player and ghost animation assets and animator controllers</li>
+<li><code>PlayerAnimator.controller</code> and <code>CreepAnimator.controller</code> are the main animation state machines to verify if characters stop animating correctly</li>
+</ul>
+<h3 id="audio">Audio</h3>
+<ul>
+<li><code>Assets/Audio/Ambient/Ambient ruins.mp3</code></li>
+<li><code>Assets/Audio/Music/Chess_duel.mp3</code></li>
+<li><code>Assets/Audio/SFX/Ghost_Alert.mp3</code></li>
+<li><code>Assets/Audio/SFX/Ghost_Roar.mp3</code></li>
+<li><code>Assets/Audio/SFX/FootSteps_Run.wav</code></li>
+</ul>
+<p>These clips support the tension curve across exploration, detection, and duel states.</p>
+<h3 id="ui">UI</h3>
+<ul>
+<li><code>Assets/UI</code> contains HUD-facing art</li>
+<li><code>Assets/TextMesh Pro</code> contains TMPro dependencies and examples</li>
+<li><code>Assets/UI/Sprites/Chess_Pieces</code> supplies the duel piece icons</li>
+</ul>
+<h2 id="scene-setup-expectations">Scene Setup Expectations</h2>
+<p>For a gameplay scene to function correctly, it should include:</p>
+<ul>
+<li>A persistent managers object with <code>GameStateManager</code>, <code>HealthSystem</code>, <code>PieceCollectionSystem</code>, <code>NoiseSystem</code>, and <code>ChessDuelManager</code></li>
+<li>A maze root with <code>MazeGenerator</code>, <code>NavMeshSurface</code>, and optionally <code>MinimapFog</code></li>
+<li>A player object with <code>CharacterController</code>, <code>PlayerInput</code>, <code>PlayerController</code>, animator, and footstep audio source</li>
+<li>A ghost object with <code>NavMeshAgent</code>, <code>GhostAI</code>, and <code>GhostAnimator</code></li>
+<li>A UI canvas with <code>UIManager</code>, <code>HUDController</code>, <code>ChessBoardUI</code>, and end-screen buttons</li>
+<li>A minimap camera using <code>MinimapController</code></li>
+</ul>
+<h2 id="production-notes">Production Notes</h2>
+<h3 id="debug--qa-notes">Debug / QA Notes</h3>
+<p>Current script-level debug shortcuts in <code>PlayerController</code>:</p>
+<ul>
+<li><code>P</code> forces the game into chess duel state</li>
+<li><code>L</code> removes one heart</li>
+</ul>
+<p>These are useful for testing, but should be removed or gated before a production release build.</p>
+<h3 id="known-architectural-notes">Known Architectural Notes</h3>
+<ul>
+<li><code>GameStateManager</code> is marked <code>DontDestroyOnLoad</code>, so duplicate manager objects across scenes must be avoided</li>
+<li><code>MainMenuManager</code> stores scene names as strings, so scene renames must be reflected in the Inspector</li>
+<li><code>PlayerSpawner</code> and <code>GhostSpawner</code> appear to be legacy or expansion scripts, while the active procedural flow is driven by <code>MazeGenerator</code></li>
+<li><code>ChessBoardUI</code> declares a <code>lastMoveColor</code> field that is not currently applied in the board refresh path</li>
+</ul>
+<h2 id="credits">Credits</h2>
+<p>Course: <code>CMPS434</code></p>
+<p>Team:</p>
+<ul>
+<li>Majid Marzouq | Gameplay Programmer</li>
+<li>Oluwadamilola Olajide | Level Designer</li>
+<li>Abdullah Hamed | UI Artist</li>
+<li>Mohamad Allouh | Narrative Designer</li>
+</ul>
+<p>Supporting docs:</p>
+<ul>
+<li><code>docs/GAME_DESIGN.md</code></li>
+<li><code>docs/SCRIPTS_REFERENCE.md</code></li>
+<li><code>cmps434/course_content/lectures</code></li>
+</ul>
+
+</body>
+
+</html>
