@@ -24,6 +24,9 @@ public class GameStateManager : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
+            // Pass this scene's LevelConfig to the persisted instance before destroying
+            if (levelConfig != null)
+                Instance.levelConfig = levelConfig;
             Destroy(gameObject);
             return;
         }
