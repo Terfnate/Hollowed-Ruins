@@ -2,9 +2,6 @@ const fs = require('fs');
 const path = require('path');
 
 const repoRoot = process.cwd();
-const readmePath = path.join(repoRoot, 'README.md');
-const outputPdf = path.join(repoRoot, 'README.pdf');
-const tempHtml = path.join(repoRoot, 'README.extension-export.html');
 const userProfile = process.env.USERPROFILE || process.env.HOME;
 const extensionRoot = path.join(
   userProfile,
@@ -30,15 +27,33 @@ function fileExists(filePath) {
   }
 }
 
-function main() {
-  if (!fileExists(readmePath)) {
-    throw new Error(`README not found: ${readmePath}`);
+function parseArgs() {
+  const [, , inputArg, outputArg, titleArg, subtitleArg] = process.argv;
+  const inputPath = inputArg
+    ? path.resolve(repoRoot, inputArg)
+    : path.join(repoRoot, 'README.md');
+  const outputPath = outputArg
+    ? path.resolve(repoRoot, outputArg)
+    : inputPath.replace(/\.md$/i, '.pdf');
+  const title = titleArg || 'Hollowed Ruins';
+  const subtitle = subtitleArg || 'Markdown Export';
+  return { inputPath, outputPath, title, subtitle };
+}
+
+async function main() {
+  const { inputPath, outputPath, title, subtitle } = parseArgs();
+
+  if (!fileExists(inputPath)) {
+    throw new Error(`Markdown file not found: ${inputPath}`);
   }
   if (!fileExists(extensionRoot)) {
     throw new Error(`Custom MD PDF extension not found: ${extensionRoot}`);
   }
 
-  const source = fs.readFileSync(readmePath, 'utf8');
+  const source = fs.readFileSync(inputPath, 'utf8');
+  const inputDir = path.dirname(inputPath);
+  const inputBase = path.basename(inputPath, path.extname(inputPath));
+  const tempHtml = path.join(inputDir, `${inputBase}.extension-export.html`);
 
   const matter = requireFromExtension('node_modules/gray-matter')(source);
   const hljs = requireFromExtension('node_modules/highlight.js');
@@ -97,7 +112,7 @@ function main() {
     }
   });
   md.use(mdInclude, {
-    root: repoRoot,
+    root: inputDir,
     includeRe: /:\[.+\]\((.+\..+)\)/i
   });
 
@@ -110,20 +125,17 @@ function main() {
   const template = read('template/template.html');
 
   const html = Mustache.render(template, {
-    title: 'Hollowed Ruins README',
+    title,
     style,
     content: contentHtml
   });
 
   fs.writeFileSync(tempHtml, html, 'utf8');
 
-  exportPdf(puppeteer).catch((error) => {
-    console.error(error);
-    process.exitCode = 1;
-  });
+  await exportPdf(puppeteer, tempHtml, outputPath, title, subtitle);
 }
 
-async function exportPdf(puppeteer) {
+async function exportPdf(puppeteer, tempHtml, outputPath, title, subtitle) {
   const browser = await puppeteer.launch({
     executablePath: puppeteer.executablePath(),
     args: ['--no-sandbox', '--disable-setuid-sandbox']
@@ -136,14 +148,14 @@ async function exportPdf(puppeteer) {
     });
 
     await page.pdf({
-      path: outputPdf,
+      path: outputPath,
       format: 'A4',
       printBackground: true,
       displayHeaderFooter: true,
       headerTemplate: `
         <div style="width:100%;font-size:8px;padding:0 12mm;color:#6a5c51;display:flex;justify-content:space-between;font-family:'Segoe UI',Arial,sans-serif;">
-          <span>HOLLOWED RUINS</span>
-          <span>Player Manual & Project Overview</span>
+          <span>${escapeHtml(title)}</span>
+          <span>${escapeHtml(subtitle)}</span>
         </div>`,
       footerTemplate: `
         <div style="width:100%;font-size:8px;padding:0 12mm;color:#6a5c51;display:flex;justify-content:space-between;font-family:'Segoe UI',Arial,sans-serif;">
@@ -162,4 +174,16 @@ async function exportPdf(puppeteer) {
   }
 }
 
-main();
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});

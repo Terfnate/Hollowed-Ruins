@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hollowed Ruins</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <style>/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+html,footer,header{
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+/*
+ * Custom MD PDF CSS
+ */
+html,footer,header{
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+
+ }
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+:root {
+  --paper: #fffdfa;
+  --ink: #231b17;
+  --muted: #6a5c51;
+  --line: #d8c4b3;
+  --panel: #f6efe8;
+  --panel-strong: #efe3d7;
+  --accent: #9a5a2a;
+  --accent-soft: #c68a57;
+}
+
+html,
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: 12px !important;
+  line-height: 1.55 !important;
+}
+
+body {
+  padding: 0 8mm !important;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--ink);
+  page-break-after: avoid;
+}
+
+h1 {
+  font-size: 28px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 8px;
+  margin-bottom: 6px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid var(--accent);
+}
+
+h2 {
+  font-size: 19px;
+  margin-top: 28px;
+  margin-bottom: 10px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--line);
+}
+
+h3 {
+  font-size: 15px;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  color: var(--accent);
+}
+
+h4 {
+  font-size: 13px;
+  margin-top: 16px;
+  margin-bottom: 6px;
+}
+
+p,
+li,
+td,
+th,
+blockquote {
+  orphans: 3;
+  widows: 3;
+}
+
+p {
+  margin: 0 0 10px;
+}
+
+blockquote {
+  background: linear-gradient(90deg, #f8f1e9 0%, #fffdfa 100%);
+  border-left: 4px solid var(--accent);
+  color: #4c3f36;
+  padding: 10px 14px;
+  margin: 14px 0 18px;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  margin: 12px auto 18px;
+  max-width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 24px rgba(42, 28, 18, 0.12);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0 18px;
+  background: white;
+  page-break-inside: avoid;
+}
+
+thead tr th {
+  background: var(--panel-strong);
+  border-bottom: 1px solid var(--line) !important;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+  padding: 8px 10px !important;
+  border: 1px solid var(--line);
+}
+
+table > tbody > tr + tr > td {
+  border-top: 1px solid var(--line) !important;
+}
+
+tr:nth-child(even) td {
+  background: #fcf8f4;
+}
+
+code {
+  font-family: Consolas, "Courier New", monospace;
+  background: #f2e7db;
+  color: #6f3211 !important;
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 0.95em !important;
+}
+
+pre {
+  background: #fbf7f2 !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 8px !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+pre code,
+pre.hljs code > div {
+  color: #2f251f !important;
+}
+
+ul,
+ol {
+  margin-top: 6px;
+  margin-bottom: 14px;
+}
+
+li {
+  margin-bottom: 4px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 18px 0;
+}
+
+h1 + p {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+h1 + p + p img,
+h1 + img {
+  margin-top: 16px;
+}
+
+blockquote p {
+  margin: 0;
+  font-style: italic;
+}
+
+h2#contents + ul {
+  columns: 2;
+  column-gap: 26px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px 18px;
+}
+
+h2#game-snapshot + table,
+h3#controls + table,
+h3#win--lose-conditions + table,
+h3#hud + table,
+h2#level-profiles + p + table,
+h3#high-value-folders + table,
+h3#runtime-code-layout + table {
+  box-shadow: 0 8px 18px rgba(42, 28, 18, 0.06);
+}
+
+strong {
+  color: #3b271c;
+}
+</style>
+</head>
+
+<body>
+    <h1 id="hollowed-ruins---game-design--development-document">HOLLOWED RUINS - GAME DESIGN &amp; DEVELOPMENT DOCUMENT</h1>
+<p>Course: <code>CMPS434</code><br>
+Section: <code>L01</code><br>
+Instructor: <code>Dr. Osama Halabi</code><br>
+Team: <code>Majid Marzouq (202309136), Oluwadamilola Olajide (202109926), Abdullah Hamed (202109951), Mohamad Allouh (201904335)</code></p>
+<hr>
+<h2 id="1-executive-overview">1. Executive Overview</h2>
+<p><code>Hollowed Ruins</code> is a single-player third-person horror exploration game built around two pressure loops:</p>
+<ul>
+<li>real-time survival inside a procedurally generated haunted maze</li>
+<li>turn-based chess duels triggered by enemy capture</li>
+</ul>
+<p>The project’s unique identity comes from combining spatial tension with tactical problem solving. The player is never only running and never only thinking. Progress requires success in both spaces.</p>
+<h3 id="genre--platform">Genre &amp; Platform</h3>
+<ul>
+<li>Genre: Horror Exploration / Puzzle Strategy</li>
+<li>Perspective: Third-person</li>
+<li>Platform: Windows PC</li>
+<li>Input: Keyboard and mouse, with Input System gamepad bindings available</li>
+<li>Player Count: Single-player</li>
+<li>Engine: Unity <code>6000.3.9f1</code></li>
+</ul>
+<h3 id="high-concept">High Concept</h3>
+<p>The player enters a cursed fortress beneath Ashen Hollow and becomes trapped in the shifting ruins of Lord Aldric Voss, now reborn as the Warden. To escape, the player must recover the broken pieces of the Warden's Seal while avoiding capture. Each capture forces a chess duel. Each loss costs a heart. Three losses and the fortress claims another prisoner.</p>
+<hr>
+<h2 id="2-narrative-direction">2. Narrative Direction</h2>
+<h3 id="the-legend">The Legend</h3>
+<p>Deep beneath the hills of Ashen Hollow lies a fortress no map remembers. It was built by Lord Aldric Voss, a chess grandmaster, occultist, and tyrant who believed the mind was the truest prison. He designed the stronghold as an ever-shifting labyrinth and tested prisoners through ritualized chess contests, taking pieces of their lives whenever they lost.</p>
+<p>When Aldric died, his will fused with the fortress itself. He became the Warden, a ghostly intelligence tied to the stone, the darkness, and the maze.</p>
+<h3 id="the-player">The Player</h3>
+<p>The player is an urban explorer who enters the ruins searching for history and treasure, only to become trapped inside the living prison. The goal becomes survival, recovery of the shattered seal, and escape.</p>
+<h3 id="narrative-function-of-mechanics">Narrative Function Of Mechanics</h3>
+<ul>
+<li>The maze supports the fiction of a fortress built to disorient and imprison</li>
+<li>The chess duels reinforce Aldric's identity and rule set</li>
+<li>The broken key pieces externalize the escape arc into visible objectives</li>
+<li>The heart system translates psychological loss into readable gameplay stakes</li>
+</ul>
+<hr>
+<h2 id="3-design-goals">3. Design Goals</h2>
+<ul>
+<li>Deliver constant tension during exploration</li>
+<li>Make every encounter with the Warden memorable and readable</li>
+<li>Ensure the chess layer feels like a feature, not a gimmick</li>
+<li>Keep failure punishing, but not unfair</li>
+<li>Use audio, UI, and level layout to maintain horror pressure</li>
+<li>Support quick understanding for first-time players</li>
+</ul>
+<hr>
+<h2 id="4-core-player-experience">4. Core Player Experience</h2>
+<h3 id="core-loop">Core Loop</h3>
+<ol>
+<li>Spawn into a generated maze</li>
+<li>Explore corridors and search for key pieces</li>
+<li>Manage line-of-sight and sound exposure</li>
+<li>Get caught or evade the Warden</li>
+<li>Resolve a chess duel if captured</li>
+<li>Resume exploration</li>
+<li>Unlock and reach the portal</li>
+</ol>
+<p><img src="../images/README/Game_flow.png" alt="Core gameplay flow"><br>
+<em>Figure 1. Core gameplay flow showing exploration, Warden pressure, chess duel resolution, and escape progression.</em></p>
+<h3 id="failure-loop">Failure Loop</h3>
+<ol>
+<li>Warden catches player</li>
+<li>Chess duel begins</li>
+<li>Player loses duel</li>
+<li>One heart is removed</li>
+<li>Exploration resumes with increased tension</li>
+<li>At zero hearts, game over</li>
+</ol>
+<hr>
+<h2 id="5-gameplay-layers">5. Gameplay Layers</h2>
+<h3 id="layer-1---real-time-exploration">Layer 1 - Real-Time Exploration</h3>
+<ul>
+<li>Third-person navigation through a generated maze</li>
+<li>Collectible key piece placement across valid corridor cells</li>
+<li>Ghost pressure through patrol, chase, and investigation states</li>
+<li>Minimap-assisted exploration with fog-of-war reveal</li>
+<li>Audio-driven stealth pressure through movement noise and pickup noise</li>
+</ul>
+<h3 id="layer-2---chess-duel-encounters">Layer 2 - Chess Duel Encounters</h3>
+<ul>
+<li>Triggered by direct capture from the Warden</li>
+<li>4x4 board size</li>
+<li>Objective-based scenarios instead of full-length chess matches</li>
+<li>Turn-based pacing during a paused exploration state</li>
+<li>Result determines whether the player escapes or loses a heart</li>
+</ul>
+<hr>
+<h2 id="6-player-rules--progression">6. Player Rules &amp; Progression</h2>
+<h3 id="player-state">Player State</h3>
+<ul>
+<li>The player begins with <code>3 hearts</code></li>
+<li>Hearts are lost only through failed chess duels</li>
+<li>Hearts are not restored during the current design scope</li>
+</ul>
+<h3 id="objectives">Objectives</h3>
+<ul>
+<li>Find all key fragments in the current maze</li>
+<li>Trigger portal reveal by completing collection</li>
+<li>Reach the portal before all hearts are lost</li>
+</ul>
+<h3 id="win--lose-conditions">Win / Lose Conditions</h3>
+<table>
+<thead>
+<tr>
+<th>Condition</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Collect all key pieces and enter the portal</td>
+<td>Win</td>
+</tr>
+<tr>
+<td>Lose all 3 hearts through chess duel failures</td>
+<td>Game Over</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="7-special-mechanics">7. Special Mechanics</h2>
+<h3 id="warden-capture-duels">Warden Capture Duels</h3>
+<p>The central special mechanic of the game is the conversion from chase gameplay into board-based challenge gameplay. This creates a rhythm of panic followed by tactical problem solving.</p>
+<h3 id="noise-system">Noise System</h3>
+<ul>
+<li>Walking emits a moderate noise radius</li>
+<li>Sprinting emits a larger noise radius</li>
+<li>Key pickups emit a large noise pulse</li>
+<li>The Warden can investigate sound without direct line of sight</li>
+</ul>
+<h3 id="final-heart-mode">Final Heart Mode</h3>
+<p>When the player reaches one heart:</p>
+<ul>
+<li><code>Q</code> activates a dash with a cooldown</li>
+<li><code>Space</code> enables jump</li>
+<li>Sprinting receives a speed multiplier</li>
+<li>A heartbeat overlay warns the player visually</li>
+<li>Dash cooldown is surfaced through the HUD</li>
+</ul>
+<p><img src="../images/RushMode.jpeg" alt="Final heart mode / rush mode"><br>
+<em>Figure 2. Final-heart mode presentation, where survival pressure is heightened through emergency mobility and visual feedback.</em></p>
+<h3 id="procedural-layout">Procedural Layout</h3>
+<p>The maze layout changes per run, but remains readable and solvable.</p>
+<h3 id="minimap-fog">Minimap Fog</h3>
+<p>The minimap reveals explored cells over time, giving a measured sense of progress without fully removing uncertainty.</p>
+<hr>
+<h2 id="8-level-design">8. Level Design</h2>
+<h3 id="maze-generation-philosophy">Maze Generation Philosophy</h3>
+<p>The maze is generated at runtime and is intended to feel:</p>
+<ul>
+<li>claustrophobic</li>
+<li>navigable</li>
+<li>unpredictable</li>
+<li>fair</li>
+</ul>
+<h3 id="generation-characteristics">Generation Characteristics</h3>
+<ul>
+<li>Recursive backtracking is used as the base carving method</li>
+<li>A central 2x2 open hall guarantees reliable spawn space</li>
+<li>Additional gap creation introduces loops and reduces single-path predictability</li>
+<li>Runtime NavMesh baking enables dynamic enemy navigation after layout generation</li>
+</ul>
+<h3 id="placement-rules">Placement Rules</h3>
+<p>After generation, the maze places:</p>
+<ul>
+<li>player spawn</li>
+<li>Warden spawn</li>
+<li>exit portal</li>
+<li>key pieces</li>
+</ul>
+<p>The portal begins hidden and is only revealed after all key pieces are collected.</p>
+<p><img src="../images/Key.jpeg" alt="Key fragment collectible"><br>
+<em>Figure 3. Key fragment collectible used to drive exploration progress and portal unlock conditions.</em></p>
+<p><img src="../images/Exit.jpeg" alt="Exit portal reveal"><br>
+<em>Figure 4. Exit portal presentation after objective completion, serving as the final escape target for the player.</em></p>
+<h3 id="level-profiles">Level Profiles</h3>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th style="text-align:right">Maze</th>
+<th style="text-align:right">Keys</th>
+<th style="text-align:right">Patrol Speed</th>
+<th style="text-align:right">Chase Speed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tutorial</td>
+<td style="text-align:right">7x7</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">6</td>
+</tr>
+<tr>
+<td>Easy</td>
+<td style="text-align:right">12x12</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">8</td>
+</tr>
+<tr>
+<td>Medium</td>
+<td style="text-align:right">15x15</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">9</td>
+</tr>
+<tr>
+<td>Hard</td>
+<td style="text-align:right">17x17</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">10</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="9-enemy-design---the-warden">9. Enemy Design - The Warden</h2>
+<h3 id="role">Role</h3>
+<p>The Warden is the game’s primary antagonist and pressure source.</p>
+<h3 id="behavior-states">Behavior States</h3>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Patrol</td>
+<td>Moves through the maze using NavMesh destinations</td>
+</tr>
+<tr>
+<td>Chase</td>
+<td>Pursues the player after detection</td>
+</tr>
+<tr>
+<td>Stun</td>
+<td>Temporarily halted after certain duel outcomes</td>
+</tr>
+</tbody>
+</table>
+<h3 id="detection-model">Detection Model</h3>
+<ul>
+<li>Vision cone detection through distance and angle checks</li>
+<li>Raycast blocking through walls</li>
+<li>Sound investigation through <code>NoiseSystem</code></li>
+</ul>
+<h3 id="encounter-resolution">Encounter Resolution</h3>
+<ul>
+<li>If the Warden catches the player, the game enters <code>ChessDuel</code></li>
+<li>If the player wins the duel, the Warden vanishes and relocates</li>
+<li>If the player loses the duel, the Warden is briefly stunned and the player loses one heart</li>
+</ul>
+<hr>
+<h2 id="10-chess-duel-design">10. Chess Duel Design</h2>
+<h3 id="intent">Intent</h3>
+<p>Chess encounters are designed to:</p>
+<ul>
+<li>reinforce the antagonist's identity</li>
+<li>shift the player into a slower but still tense decision space</li>
+<li>create replayable challenge variation through scenario content</li>
+</ul>
+<h3 id="duel-rules">Duel Rules</h3>
+<ul>
+<li>Board size: <code>4x4</code></li>
+<li>Player side: White</li>
+<li>Enemy side: Black</li>
+<li>Scenario based, not full match based</li>
+<li>No real-time timer per move in the current implementation</li>
+</ul>
+<h3 id="objective-types">Objective Types</h3>
+<ul>
+<li><code>DontLosePiece</code></li>
+<li><code>ProtectPiece</code></li>
+<li><code>CaptureTarget</code></li>
+<li><code>SurviveNTurns</code></li>
+</ul>
+<h3 id="example-encounter-goals">Example Encounter Goals</h3>
+<ul>
+<li>Survive for 3 turns</li>
+<li>Protect the bishop for 2 turns</li>
+<li>Capture a target piece before turns run out</li>
+<li>Avoid losing any white piece</li>
+</ul>
+<h3 id="chess-ai-philosophy">Chess AI Philosophy</h3>
+<p>The ghost AI uses a lightweight minimax-based move choice. This keeps the duel system readable and consistent without overbuilding a full tournament-grade chess engine.</p>
+<hr>
+<h2 id="11-player-facing-ui--ux">11. Player-Facing UI / UX</h2>
+<h3 id="hud-elements">HUD Elements</h3>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hearts</td>
+<td>Read remaining lives</td>
+</tr>
+<tr>
+<td>Key Counter</td>
+<td>Track objective progress</td>
+</tr>
+<tr>
+<td>Portal Prompt</td>
+<td>Signal exit phase</td>
+</tr>
+<tr>
+<td>Ghost Warning</td>
+<td>Signal chase state</td>
+</tr>
+<tr>
+<td>Minimap</td>
+<td>Support navigation and discovery</td>
+</tr>
+<tr>
+<td>Heartbeat Overlay</td>
+<td>Emphasize danger in final-heart mode</td>
+</tr>
+<tr>
+<td>Dash Indicator</td>
+<td>Show cooldown and readiness</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ux-priorities">UX Priorities</h3>
+<ul>
+<li>Keep state changes legible</li>
+<li>Make danger escalation obvious</li>
+<li>Keep objective communication short and direct</li>
+<li>Let the chess UI clearly communicate valid moves and turn pressure</li>
+</ul>
+<p><img src="../images/HUD.jpeg" alt="Gameplay HUD"><br>
+<em>Figure 5. Exploration HUD showing hearts, objective tracking, and high-priority player feedback.</em></p>
+<p><img src="../images/UI.jpeg" alt="UI presentation"><br>
+<em>Figure 6. In-game UI composition and visual framing used to support readability during high-tension moments.</em></p>
+<hr>
+<h2 id="12-audio-direction">12. Audio Direction</h2>
+<h3 id="audio-intent">Audio Intent</h3>
+<p>Audio should do more than decorate the environment. It should function as tension delivery and behavioral feedback.</p>
+<h3 id="current-audio-categories">Current Audio Categories</h3>
+<ul>
+<li>Ambient ruins track</li>
+<li>Ghost alert cue</li>
+<li>Ghost roar cue</li>
+<li>Chess duel music</li>
+<li>Player footstep audio</li>
+</ul>
+<h3 id="audio-use-cases">Audio Use Cases</h3>
+<ul>
+<li>Ambient layers establish dread</li>
+<li>Alert cues reinforce Warden state changes</li>
+<li>Duel music marks the transition into tactical mode</li>
+<li>Footsteps increase spatial awareness and stealth pressure</li>
+</ul>
+<hr>
+<h2 id="13-scene--build-structure">13. Scene &amp; Build Structure</h2>
+<h3 id="build-scenes">Build Scenes</h3>
+<ul>
+<li><code>Assets/_Scenes/MainMenu.unity</code></li>
+<li><code>Assets/_Scenes/LevelTutorial.unity</code></li>
+<li><code>Assets/_Scenes/LevelEasy.unity</code></li>
+<li><code>Assets/_Scenes/LevelMedium.unity</code></li>
+<li><code>Assets/_Scenes/LevelHard.unity</code></li>
+</ul>
+<h3 id="menu-flow">Menu Flow</h3>
+<ul>
+<li>Main menu</li>
+<li>Level select</li>
+<li>Gameplay scene</li>
+<li>Win / Game Over return flow</li>
+</ul>
+<p><img src="../images/MainMenu.jpeg" alt="Main menu screen"><br>
+<em>Figure 7. Main menu presentation used as the front-end entry point for the game experience.</em></p>
+<p><img src="../images/LevelSelector.jpeg" alt="Level selection screen"><br>
+<em>Figure 8. Level select interface used to route players into tutorial and difficulty-based gameplay scenes.</em></p>
+<hr>
+<h2 id="14-technical-architecture">14. Technical Architecture</h2>
+<h3 id="core-runtime-folders">Core Runtime Folders</h3>
+<table>
+<thead>
+<tr>
+<th>Folder</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Scripts/Core</code></td>
+<td>Game state, health, noise, level tuning</td>
+</tr>
+<tr>
+<td><code>Scripts/Player</code></td>
+<td>Player movement and spawn support</td>
+</tr>
+<tr>
+<td><code>Scripts/Maze</code></td>
+<td>Procedural generation, collection, exit flow</td>
+</tr>
+<tr>
+<td><code>Scripts/Ghost</code></td>
+<td>AI, animation bridge, enemy support</td>
+</tr>
+<tr>
+<td><code>Scripts/Chess</code></td>
+<td>Duel rules, board logic, scenarios, evaluator, AI</td>
+</tr>
+<tr>
+<td><code>Scripts/UI</code></td>
+<td>HUD, minimap, menus, duel board, screens</td>
+</tr>
+</tbody>
+</table>
+<h3 id="key-systems">Key Systems</h3>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GameStateManager</code></td>
+<td>Global state control between exploration, duel, win, and game over</td>
+</tr>
+<tr>
+<td><code>HealthSystem</code></td>
+<td>Heart tracking and defeat trigger</td>
+</tr>
+<tr>
+<td><code>NoiseSystem</code></td>
+<td>Broadcasts sound events to AI</td>
+</tr>
+<tr>
+<td><code>LevelConfig</code></td>
+<td>Difficulty tuning per scene</td>
+</tr>
+<tr>
+<td><code>PlayerController</code></td>
+<td>Movement, look, sound emission, last-heart abilities</td>
+</tr>
+<tr>
+<td><code>MazeGenerator</code></td>
+<td>Runtime maze generation, object placement, NavMesh prep</td>
+</tr>
+<tr>
+<td><code>PieceCollectionSystem</code></td>
+<td>Key tracking and portal reveal</td>
+</tr>
+<tr>
+<td><code>GhostAI</code></td>
+<td>Warden state machine and pursuit logic</td>
+</tr>
+<tr>
+<td><code>ChessDuelManager</code></td>
+<td>Duel orchestration and resolution</td>
+</tr>
+<tr>
+<td><code>ChessBoard</code></td>
+<td>Pure 4x4 board logic</td>
+</tr>
+<tr>
+<td><code>GhostChessAI</code></td>
+<td>Enemy move selection in duels</td>
+</tr>
+<tr>
+<td><code>HUDController</code></td>
+<td>Exploration HUD and warning systems</td>
+</tr>
+<tr>
+<td><code>UIManager</code></td>
+<td>Screen visibility by game state</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="15-content-inventory">15. Content Inventory</h2>
+<h3 id="environment">Environment</h3>
+<ul>
+<li><code>Assets/DungeonModularPack</code></li>
+<li>Runtime-built floor and wall arrangement</li>
+</ul>
+<h3 id="character--animation">Character / Animation</h3>
+<ul>
+<li><code>Assets/Art/Mixamo</code></li>
+<li><code>Assets/Art/Animations</code></li>
+<li><code>PlayerAnimator.controller</code></li>
+<li><code>CreepAnimator.controller</code></li>
+</ul>
+<h3 id="audio">Audio</h3>
+<ul>
+<li><code>Assets/Audio/Ambient/Ambient ruins.mp3</code></li>
+<li><code>Assets/Audio/Music/Chess_duel.mp3</code></li>
+<li><code>Assets/Audio/SFX/Ghost_Alert.mp3</code></li>
+<li><code>Assets/Audio/SFX/Ghost_Roar.mp3</code></li>
+<li><code>Assets/Audio/SFX/FootSteps_Run.wav</code></li>
+</ul>
+<h3 id="ui">UI</h3>
+<ul>
+<li><code>Assets/UI</code></li>
+<li><code>Assets/UI/Sprites/Chess_Pieces</code></li>
+<li><code>Assets/TextMesh Pro</code></li>
+</ul>
+<hr>
+<h2 id="16-production-notes">16. Production Notes</h2>
+<h3 id="scene-setup-expectations">Scene Setup Expectations</h3>
+<p>Each gameplay scene should contain:</p>
+<ul>
+<li>a managers root with state, health, collection, noise, and duel systems</li>
+<li>a maze root with generator and NavMesh surface</li>
+<li>a player with <code>CharacterController</code>, <code>PlayerInput</code>, and <code>PlayerController</code></li>
+<li>a Warden object with <code>NavMeshAgent</code>, <code>GhostAI</code>, and <code>GhostAnimator</code></li>
+<li>a UI canvas with HUD, duel UI, and result screens</li>
+<li>a minimap camera</li>
+</ul>
+<h3 id="current-debug-notes">Current Debug Notes</h3>
+<p><code>PlayerController</code> currently includes:</p>
+<ul>
+<li><code>P</code> to force a chess duel</li>
+<li><code>L</code> to remove one heart</li>
+</ul>
+<p>These are useful for testing, but should be removed or gated before final submission.</p>
+<h3 id="architectural-risks--notes">Architectural Risks / Notes</h3>
+<ul>
+<li><code>GameStateManager</code> uses <code>DontDestroyOnLoad</code>, so duplicate manager setups must be avoided</li>
+<li><code>MainMenuManager</code> stores scene names as Inspector strings</li>
+<li><code>PlayerSpawner</code> and <code>GhostSpawner</code> appear legacy compared with the current procedural actor positioning path</li>
+<li><code>ChessBoardUI</code> includes a <code>lastMoveColor</code> field that is currently unused in the refresh path</li>
+</ul>
+<hr>
+<h2 id="17-scope-definition">17. Scope Definition</h2>
+<h3 id="current-mvp-scope">Current MVP Scope</h3>
+<ul>
+<li>Procedural maze generation</li>
+<li>Key collection and portal reveal</li>
+<li>One ghost enemy with patrol, chase, stun, and sound reaction</li>
+<li>Chess duel mode with multiple scenario objectives</li>
+<li>3-heart life system</li>
+<li>Exploration HUD and minimap</li>
+<li>Main menu and difficulty scenes</li>
+</ul>
+<h3 id="stretch-opportunities">Stretch Opportunities</h3>
+<ul>
+<li>Additional Warden types or patrol styles</li>
+<li>More chess scenarios</li>
+<li>Environmental hazards</li>
+<li>Story pickups and lore fragments</li>
+<li>Additional difficulty modifiers</li>
+</ul>
+<h3 id="out-of-scope">Out Of Scope</h3>
+<ul>
+<li>Multiplayer</li>
+<li>Open world exploration</li>
+<li>Full competitive chess engine</li>
+<li>RPG progression systems</li>
+</ul>
+<hr>
+<h2 id="18-team-responsibilities">18. Team Responsibilities</h2>
+<table>
+<thead>
+<tr>
+<th>Member</th>
+<th>Role</th>
+<th>Deliverables</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Majid Marzouq (202309136)</td>
+<td>Programmer</td>
+<td>Maze generation, player movement, ghost AI, chess system, health system, noise system, technical gameplay implementation</td>
+</tr>
+<tr>
+<td>Oluwadamilola Olajide (202109926)</td>
+<td>Level Designer</td>
+<td>Level layout, gameplay space design, maze tuning, environmental setup, pacing of exploration spaces, animation integration</td>
+</tr>
+<tr>
+<td>Abdullah Hamed (202109951)</td>
+<td>Sound, Music &amp; 2D Elements</td>
+<td>Ambient ruins audio, ghost alert cues, chess duel music, scream SFX, sprites, HUD-facing 2D elements</td>
+</tr>
+<tr>
+<td>Mohamad Allouh (201904335)</td>
+<td>Story Teller &amp; Presentation</td>
+<td>Narrative development, story direction, lore framing, presentation structure, project presentation support</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="19-competitive-reference">19. Competitive Reference</h2>
+<ul>
+<li><code>The Ouroboros King</code> for tactical puzzle identity</li>
+<li><code>Phantom Abyss</code> for pressured exploration and threat presence</li>
+</ul>
+<p>Differentiation:</p>
+<p>The Warden is both hunter and strategist. The player does not simply evade danger or solve isolated puzzles. They must survive pursuit and defeat the mind behind the prison.</p>
+<hr>
+<p><em>Last updated: 2026-05-09</em></p>
+
+</body>
+
+</html>
